@@ -12,7 +12,7 @@ Ext.define('Melisa.core.Instanciador', {
     getExtrasDependencias: function() {
         
         return [
-            'Nerine.store.core.Base'
+            'Melisa.store.core.Base'
         ];
         
     },

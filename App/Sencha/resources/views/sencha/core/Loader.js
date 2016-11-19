@@ -1,6 +1,6 @@
 /**
  * 
- * @class Nerine.util.Loader
+ * @class Melisa.util.Loader
  * 
  * Clase singleton permite realizar la carga de módulos JavaScript
  * 

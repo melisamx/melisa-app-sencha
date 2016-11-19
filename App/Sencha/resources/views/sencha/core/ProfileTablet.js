@@ -1,12 +1,13 @@
 
-Ext.define('Melisa.core.ProfilePhone', {
+Ext.define('Melisa.core.ProfileTablet', {
     extend: 'Ext.app.Profile',
     
     view: null,
-    
+    css: null,
+
     isActive: function() {
         
-        return Ext.platformTags.phone;
+        return Ext.platformTags.tablet;
         
     },
     
@@ -14,6 +15,7 @@ Ext.define('Melisa.core.ProfilePhone', {
         
         var me = this;
         
+        /* inyectamos css especifico a la tablet  */
         Ext.require([
             /* necesario para que se detecte correctamente la orientacion  */
             /* este bug esta corregido en la versión de pago 6.0.2  */
@@ -27,10 +29,10 @@ Ext.define('Melisa.core.ProfilePhone', {
             me.view
         ], function() {
             
+            Melisa.ux.util.CSS.swapStyleSheet('tablet', '/' + me.css + '/css/main-tablet.css');
             Ext.Viewport.add(Ext.create(me.view));
-
+            
         });
         
     }
-    
 });
