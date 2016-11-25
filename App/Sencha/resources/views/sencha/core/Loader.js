@@ -71,14 +71,14 @@ Ext.define('Melisa.core.Loader', {
             
         },
         
-        nsIsLoaded: function(ns) {
+        nsIsLoaded: function(nameSpace) {
             
             var me = this,
-                module = this.getNsBases()[ns];
+                module = this.getNsBases()[nameSpace];
             
-            me.log('verify module is load?', ns);
+            me.log('verify module is load?', nameSpace);
             
-            /* obtenemos el ns separado */
+            /* obtenemos el nameSpace separado */
             return module ? module : false;
             
         },
@@ -100,7 +100,7 @@ Ext.define('Melisa.core.Loader', {
                 loaders = me.getLoaders(),
                 loadersLoadeds = me.getLoadersLoadeds(),
                 loadersCallbacks = me.getLoadersCallbacks(),
-                module = me.nsIsLoaded(loader.config.ns),
+                module = me.nsIsLoaded(loader.config.nameSpace),
                 bandera = 1;
             
             if( !loaders[loader.idLoader]) {
@@ -198,7 +198,7 @@ Ext.define('Melisa.core.Loader', {
                 jxhr;
             
             /* registramos en el loader el modulo a cargar */
-            loaders [idLoader][configModulo.ns]= false;
+            loaders [idLoader][configModulo.nameSpace]= false;
             
             jxhr = jQuery.ajax({
                 data: {
@@ -233,7 +233,7 @@ Ext.define('Melisa.core.Loader', {
             
             if(response !== '') {
 
-                loaders[xhr.my.idLoader][xhr.my.config.ns] = true;
+                loaders[xhr.my.idLoader][xhr.my.config.nameSpace] = true;
 
             } else {
 
@@ -256,7 +256,7 @@ Ext.define('Melisa.core.Loader', {
     
         me.log('register module', configModule);
     
-        nsBases [configModule.ns] = module;
+        nsBases [configModule.nameSpace] = module;
         
     },
     
@@ -302,8 +302,8 @@ Ext.define('Melisa.core.Loader', {
         /* recorremos los modulos solicitados a cargar */
         for(i in optionModule) {
             
-            /* verificamos ke se haya especificao el ns y su url */
-            if( !optionModule[i].ns || !optionModule[i].url) {
+            /* verificamos ke se haya especificao el nameSpace y su url */
+            if( !optionModule[i].nameSpace || !optionModule[i].url) {
                 
                 me.log('config invalid');
                 break;
@@ -315,7 +315,7 @@ Ext.define('Melisa.core.Loader', {
             * como modulos descargados y en ejecucion
             *
             */           
-            module = me.nsIsLoaded(optionModule[i].ns);
+            module = me.nsIsLoaded(optionModule[i].nameSpace);
            
             if(module) {
 
@@ -326,7 +326,7 @@ Ext.define('Melisa.core.Loader', {
                  * a que las dependencias al final no conicidiran con el total
                  * 
                  */
-                loaders [idLoader][optionModule[i].ns]= module;
+                loaders [idLoader][optionModule[i].nameSpace]= module;
                 loadersLoadeds[idLoader].load++;
                 
                 me.log('module is loaded', optionModule[i]);
