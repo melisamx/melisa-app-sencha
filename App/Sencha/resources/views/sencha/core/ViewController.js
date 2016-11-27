@@ -1,8 +1,5 @@
-
 Ext.define('Melisa.core.ViewController', {
     extend: 'Ext.app.ViewController',
-    
-    alias: 'controller.nviewcontroller',
     
     mixins: [
         'Melisa.core.Base'
@@ -17,20 +14,6 @@ Ext.define('Melisa.core.ViewController', {
         view.on(renderEvent, me.onRender, me, {
             single: true
         });
-        
-    },
-    
-    /* necesario para obtener la configuración asignada a la vista wrapper
-     * en la versión modern solo funcina asta que se haya painted la vista  */    
-    getConfigModule: function() {
-        
-        return this.getView().up('[action="wrapper"]').getConfigModule();
-        
-    },
-    
-    getWrapper: function() {
-        
-        return this.getView().up('[action="wrapper"]');
         
     },
     

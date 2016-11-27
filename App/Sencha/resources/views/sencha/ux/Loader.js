@@ -2,6 +2,13 @@
  * Loader indicator
  */
 Ext.define('Melisa.ux.Loader', {
+    singleton: true,
+    
+    constructor: function() {
+        
+        this.destroy();
+        
+    },
     
     destroy: function() {
         

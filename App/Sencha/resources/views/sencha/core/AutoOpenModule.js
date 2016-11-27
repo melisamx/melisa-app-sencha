@@ -1,12 +1,17 @@
-
 Ext.define('Melisa.core.AutoOpenModule', {
-    extend: 'Melisa.core.Base',
+    
+    requires: [
+        'Melisa.core.Base'
+    ],
+    
+    mixins: [
+        'Melisa.core.Base'
+    ],
     
     singleton: true,
     
     config: {
-        debug: true,
-        evento: null,
+        vento: null,
         store: null
     },
     
@@ -18,8 +23,6 @@ Ext.define('Melisa.core.AutoOpenModule', {
                 id: 'native'
             }),
             evento = store.getItem('notificacion');
-        
-        me.callParent(arguments);
         
         me.setStore(store);
         
@@ -54,13 +57,7 @@ Ext.define('Melisa.core.AutoOpenModule', {
             
         }
         
-        try {
-            
-            evento = Ext.JSON.decode(eventObject);
-            
-        } catch(e) {
-            
-        }
+        evento = Ext.decode(eventObject, true);
         
         if( !evento) {
             

@@ -1,20 +1,26 @@
 /**
- * Clase que carga gran parte del core
- * 
+ * Class base application
  */
 Ext.define('Melisa.core.Application', {
+    extend: 'Ext.app.Application',
+    
     alternateClassName: [
         'Melisa.App'
     ],
     
     requires: [
-        'Melisa.core.Instanciador',
-        'Melisa.core.Loader',
-        'Melisa.core.ViewController',
+        'Melisa.core.Logger',
+        'Melisa.core.AutoOpenModule',
         'Melisa.core.ProfileDesktop',
-        'Melisa.core.ProfilePhone'
+        'Melisa.core.ProfilePhone',
+        'Melisa.core.ViewController'
     ],
     
-    singleton: true
+    launch: function() {
+        
+        /* remove WAI-ARIA warnings */
+        Ext.ariaWarn = Ext.emptyFn;
+        
+    }
     
 });
