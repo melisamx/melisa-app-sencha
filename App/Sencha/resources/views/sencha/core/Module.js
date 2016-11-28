@@ -1,7 +1,12 @@
 Ext.define('Melisa.core.Module', {
     
     requires: [
+        'Melisa.core.Base',
         'Melisa.core.module.Manager'
+    ],
+    
+    mixins: [
+        'Melisa.core.Base'
     ],
     
     config: {
@@ -14,6 +19,8 @@ Ext.define('Melisa.core.Module', {
         
         var me = this,
             config = me.getConfigModule();
+    
+        me.log('init module', config);
         
         if(me.getInitialized()) {
             
@@ -62,7 +69,9 @@ Ext.define('Melisa.core.Module', {
     onReboot: function() {
         
         console.log('reboot', arguments);
-        
+        /* necesary or never show */
+        this.getEl().removeCls('x-hidden-offsets');
+        this.show();
         
     }
     

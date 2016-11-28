@@ -14,24 +14,45 @@ Ext.define('Melisa.core.module.Manager', {
     unRegister: function(nameSpace) {
         
         var me = this,
-            module = me.modules[nameSpace];
-        
+            module = me.modules[nameSpace],
+            result;
+        console.log(module);
         if( !module) {
             
-            me.log('no exist module');
+            me.log('no exist module', me.modules);
             return;
             
         }
         
-        if( !module.fireEvent('beforeclosemodule')) {
+        result = module.fireEvent('beforeclosemodule');
+        
+        if( result === false) {
             
+            me.log('cancel un unregister');
             return false;
-                        
+            
         }
         
+        me.log('module delete', nameSpace);
         delete me.modules[nameSpace];
         module.destroy();
+        me.log('module destroy', me.modules);
         return true;
+        
+    },
+    
+    get: function(nameSpace) {
+        
+        var me = this,
+            module = me.modules[nameSpace];
+        
+        if( !module) {
+            
+            return false;
+            
+        }
+        
+        return module;
         
     },
     
@@ -97,7 +118,7 @@ Ext.define('Melisa.core.module.Manager', {
         }
         
         me.log('module reboot');
-        module.fireEvent('reboot');
+        module.fireEvent('reboot', module);
         
         return module;
         
