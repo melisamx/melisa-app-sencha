@@ -1,6 +1,14 @@
 Ext.define('Melisa.core.module.Manager', {
     singleton: true,
     
+    requires: [
+        'Melisa.core.Base'
+    ],
+    
+    mixins: [
+        'Melisa.core.Base'
+    ],
+    
     modules: {},
     
     unRegister: function(nameSpace) {
@@ -10,7 +18,7 @@ Ext.define('Melisa.core.module.Manager', {
         
         if( !module) {
             
-            console.log('no exist module');
+            me.log('no exist module');
             return;
             
         }
@@ -34,13 +42,18 @@ Ext.define('Melisa.core.module.Manager', {
         
         if( module) {
             
+            me.log('exist module return module', module);
             return module;
             
         }
         
         if( !Ext.ClassManager.get(moduleConfig.nameSpace)) {
             
+            me.log('no exist class, require', moduleConfig.nameSpace);
+            
             Ext.require(moduleConfig.nameSpace, function() {
+                
+                me.log('class loaded', moduleConfig.nameSpace);
                 
                 me.register(moduleConfig, callback);
                 
@@ -49,6 +62,8 @@ Ext.define('Melisa.core.module.Manager', {
             return;
             
         }
+        
+        me.log('register module', moduleConfig);
         
         module = me.modules[moduleConfig.nameSpace] = Ext.create(moduleConfig.nameSpace);
         module.setConfigModule(moduleConfig);
@@ -65,21 +80,23 @@ Ext.define('Melisa.core.module.Manager', {
             module = me.register(moduleConfig, callback);
     
         if( !module) {
-            console.log('module no exist');
+            
+            me.log('class is loading', moduleConfig.nameSpace);
             return;
             
         }
         
-        console.log('module exist', module);
+        me.log('module exist', module);
         
         /* permit launch class downloaded */
         if( !module.getIsReady()) {
-            console.log('module no is ready');
+            
+            me.log('module not is ready');
             return;
             
         }
         
-        console.log('module reboot');
+        me.log('module reboot');
         module.fireEvent('reboot');
         
         return module;

@@ -1,5 +1,4 @@
 Ext.define('Melisa.core.module.Create', {
-    extend: 'Ext.Mixin',
     
     save: function() {
         
