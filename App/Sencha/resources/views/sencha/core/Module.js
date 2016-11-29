@@ -53,10 +53,27 @@ Ext.define('Melisa.core.Module', {
             
         }
         
+        if( Ext.isArray(config.assets)) {
+            
+            me.loadAsset(config.assets);
+            
+        }
+        
         me.on('reboot', me.onReboot, me);
         me.getViewModel().setData(config.data); 
         me.setIsReady(true);
         me.fireEvent('ready', me, config);
+        
+    },
+    
+    loadAsset: function(assets) {
+        
+        Ext.each(assets, function(asset) {
+            
+            if(asset.idAssetType === 2) Ext.util.CSS.swapStyleSheet(asset.id, asset.url);
+            else Ext.Loader.loadScript(asset.url);
+            
+        });
         
     },
     
