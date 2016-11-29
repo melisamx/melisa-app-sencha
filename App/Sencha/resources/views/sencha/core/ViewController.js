@@ -1,9 +1,11 @@
 Ext.define('Melisa.core.ViewController', {
     extend: 'Ext.app.ViewController',
     
-    mixins: [
+    mixins: !Ext.platformTags.desktop ? [
         'Melisa.core.Base',
-        !Ext.platformTags.desktop ? 'Melisa.ux.Navigate' : null
+        'Melisa.ux.Navigate'
+    ] : [
+        'Melisa.core.Base'
     ],
     
     init: function() {
