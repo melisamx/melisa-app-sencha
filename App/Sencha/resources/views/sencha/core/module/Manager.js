@@ -117,6 +117,12 @@ Ext.define('Melisa.core.module.Manager', {
             
         }
         
+        if( Ext.isFunction(callback)) {
+            
+            callback(module);
+            
+        }
+        
         me.log('module reboot');
         module.fireEvent('reboot', module);
         
