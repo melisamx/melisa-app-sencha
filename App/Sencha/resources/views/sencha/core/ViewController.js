@@ -20,6 +20,12 @@ Ext.define('Melisa.core.ViewController', {
         
     },
     
-    onRender: function() {}
+    onRender: function() {},
+    
+    showError: function(title, message, callback, scope) {
+        
+        Ext.Msg.alert(title, message, callback, scope);
+        
+    }
         
 });
