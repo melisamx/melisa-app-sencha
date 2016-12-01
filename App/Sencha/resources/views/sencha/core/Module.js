@@ -30,6 +30,7 @@ Ext.define('Melisa.core.Module', {
         }
         
         me.setInitialized(true);
+        me.on('ready', me.onReady, me);
         
         Ext.Ajax.request({
             url: config.url,
@@ -83,6 +84,36 @@ Ext.define('Melisa.core.Module', {
         
     },
     
+    onReady: function() {
+        
+        this.redirectToModule();
+        
+    },
+    
+    redirectToModule: function() {
+        
+        var me = this,
+            model = me.getViewModel(),
+            route = model.get('route'),
+            controller = me.getController();
+    
+        if( route) {
+            
+            me.redirectTo(route);
+            return;
+            
+        }
+        
+        if( !controller) {
+            
+            return;
+            
+        }
+        
+        controller.redirectTo(Ext.ClassManager.getName(me));
+        
+    },
+    
     onReboot: function() {
         
         var me = this;
@@ -96,6 +127,8 @@ Ext.define('Melisa.core.Module', {
             me.show();
             
         }
+        
+        me.redirectToModule();
         
     }
     

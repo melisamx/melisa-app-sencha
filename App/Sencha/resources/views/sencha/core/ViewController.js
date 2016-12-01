@@ -26,6 +26,18 @@ Ext.define('Melisa.core.ViewController', {
         
         Ext.Msg.alert(title, message, callback, scope);
         
+    },
+    
+    activateMainModule: function() {
+        
+        this.activateModule();
+        
+    },
+    
+    activateModule: function(module) {
+        
+        Ext.GlobalEvents.fireEvent('activatemodule', module);
+        
     }
         
 });
