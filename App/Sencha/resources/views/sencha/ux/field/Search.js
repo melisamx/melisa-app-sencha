@@ -13,6 +13,12 @@ Ext.define('Melisa.ux.field.Search', {
         
         field.on('keyup', me.onKeyupField, me);
         
+        if( !Ext.platformTags.desktop) {
+            
+            field.on('clearicontap', me.onKeyupField, me);
+            
+        }
+        
     },
     
     onKeyupField: function() {
