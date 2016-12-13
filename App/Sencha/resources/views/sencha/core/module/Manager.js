@@ -68,6 +68,11 @@ Ext.define('Melisa.core.module.Manager', {
             
         }
         
+        Ext.Viewport.setMasked({
+            xtype: 'loadmask',
+            message: 'Abriendo módulo'
+        });
+        
         if( !Ext.ClassManager.get(moduleConfig.nameSpace)) {
             
             me.log('no exist class, require', moduleConfig.nameSpace);
@@ -90,6 +95,8 @@ Ext.define('Melisa.core.module.Manager', {
         module.setConfigModule(moduleConfig);
         callback(module);
         module.initModule();
+        
+        Ext.Viewport.setMasked(false);
         
         return module;
         
