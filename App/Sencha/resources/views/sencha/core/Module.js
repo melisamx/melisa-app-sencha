@@ -32,6 +32,16 @@ Ext.define('Melisa.core.Module', {
         me.setInitialized(true);
         me.on('ready', me.onReady, me);
         
+        if( typeof me.moduleRemoteConfig !== 'undefined' && !me.moduleRemoteConfig) {
+            
+            me.log('disabled get remote config');
+            me.setIsReady(true);
+            me.on('reboot', me.onReboot, me);
+            me.fireEvent('ready', me, config);
+            return;
+            
+        }
+        
         Ext.Ajax.request({
             url: config.url,
             method: 'GET',
@@ -60,9 +70,9 @@ Ext.define('Melisa.core.Module', {
             
         }
         
-        me.on('reboot', me.onReboot, me);
-        me.getViewModel().setData(config.data); 
+        me.getViewModel().setData(config.data);
         me.setIsReady(true);
+        me.on('reboot', me.onReboot, me);
         me.fireEvent('ready', me, config);
         
     },
