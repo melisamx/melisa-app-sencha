@@ -68,10 +68,14 @@ Ext.define('Melisa.core.module.Manager', {
             
         }
         
-        Ext.Viewport.setMasked({
-            xtype: 'loadmask',
-            message: 'Abriendo módulo'
-        });
+        if( Ext.platformTags.modern) {
+            
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Abriendo módulo'
+            });
+            
+        }
         
         if( !Ext.ClassManager.get(moduleConfig.nameSpace)) {
             
@@ -96,7 +100,11 @@ Ext.define('Melisa.core.module.Manager', {
         callback(module);
         module.initModule();
         
-        Ext.Viewport.setMasked(false);
+        if( Ext.platformTags.modern) {
+            
+            Ext.Viewport.setMasked(false);
+            
+        }
         
         return module;
         
