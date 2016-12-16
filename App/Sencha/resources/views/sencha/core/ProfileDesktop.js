@@ -6,7 +6,7 @@ Ext.define('Melisa.core.ProfileDesktop', {
     
     isActive: function() {
         
-        return Ext.platformTags.desktop;
+        return Ext.platformTags.desktop && Ext.platformTags.classic;
         
     },
     

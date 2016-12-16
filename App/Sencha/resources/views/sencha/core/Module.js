@@ -130,7 +130,7 @@ Ext.define('Melisa.core.Module', {
         
         console.log('reboot', arguments);
         
-        if( Ext.platformTags.desktop) {
+        if( Ext.platformTags.classic) {
             
             /* necesary or never show */
             me.getEl().removeCls('x-hidden-offsets');

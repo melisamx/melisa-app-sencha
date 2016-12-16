@@ -6,7 +6,7 @@ Ext.define('Melisa.core.ProfilePhone', {
     
     isActive: function() {
         
-        return Ext.platformTags.phone;
+        return Ext.platformTags.phone || Ext.platformTags.modern;
         
     },
     
