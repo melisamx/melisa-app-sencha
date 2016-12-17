@@ -32,6 +32,13 @@ Ext.define('Melisa.core.Module', {
         me.setInitialized(true);
         me.on('ready', me.onReady, me);
         
+        if( typeof config.url === 'undefined' || Ext.isEmpty(config.url)) {
+            
+            me.log('disabled get remote config but no specific url config');
+            me.moduleRemoteConfig = false;
+            
+        }
+        
         if( typeof me.moduleRemoteConfig !== 'undefined' && !me.moduleRemoteConfig) {
             
             me.log('disabled get remote config');
@@ -105,7 +112,9 @@ Ext.define('Melisa.core.Module', {
         var me = this,
             model = me.getViewModel(),
             route = model.get('route'),
-            controller = me.getController();
+            controller = me.getController(),
+            isCurrent,
+            token = Ext.ClassManager.getName(me);
     
         if( route) {
             
@@ -114,13 +123,30 @@ Ext.define('Melisa.core.Module', {
             
         }
         
-        if( !controller) {
+        if( controller) {
             
+            controller.redirectTo(token);
             return;
             
         }
         
-        controller.redirectTo(Ext.ClassManager.getName(me));
+        /* 
+         * extract to
+         * http://docs.sencha.com/extjs/6.2.0/modern/src/BaseController.js.html#Ext.app.BaseController-method-redirectTo
+         * 
+         */
+        
+        isCurrent = Ext.util.History.getToken() === token;
+        
+        if( !isCurrent) {
+            
+            Ext.util.History.add(token);
+            
+        } else {
+            
+            Ext.app.route.Router.onStateChange(token);
+            
+        }
         
     },
     

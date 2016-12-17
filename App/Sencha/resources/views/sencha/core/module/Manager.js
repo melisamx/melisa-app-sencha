@@ -97,7 +97,13 @@ Ext.define('Melisa.core.module.Manager', {
         
         module = me.modules[moduleConfig.nameSpace] = Ext.create(moduleConfig.nameSpace);
         module.setConfigModule(moduleConfig);
-        callback(module);
+        
+        if( Ext.isFunction(callback)) {
+            
+            callback(module);
+            
+        }
+        
         module.initModule();
         
         if( Ext.platformTags.modern) {
