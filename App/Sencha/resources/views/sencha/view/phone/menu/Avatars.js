@@ -38,7 +38,7 @@ Ext.define('Melisa.view.phone.menu.Avatars', {
             scale: 'large',
             width: '100%',
             bind: {
-                text: '{user.name}<br><small>{urese.email}</smal>'
+                text: '{user.name}<br><small>{user.email}</smal>'
             },
             iconAlign: 'right',
             iconCls: 'fa fa-caret-down',
