@@ -1,5 +1,5 @@
 Ext.define('Melisa.view.phone.gmd.CardActions', {
-    extend: 'Ext.TitleBar',
+    extend: 'Ext.Toolbar',
     alias: 'widget.gmdcardactions',
     
     docked: 'bottom',
