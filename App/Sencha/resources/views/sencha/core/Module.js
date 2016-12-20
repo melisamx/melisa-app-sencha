@@ -49,6 +49,15 @@ Ext.define('Melisa.core.Module', {
             
         }
         
+        if( Ext.platformTags.modern) {
+            
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Configurando módulo...'
+            });
+            
+        }
+        
         Ext.Ajax.request({
             url: config.url,
             method: 'GET',
@@ -63,6 +72,12 @@ Ext.define('Melisa.core.Module', {
         
         var me = this,
             config = Ext.decode(request.responseText, true);
+    
+        if( Ext.platformTags.modern) {
+            
+            Ext.Viewport.setMasked(false);
+            
+        }
         
         if( !config || typeof config.data === 'undefined') {
             
@@ -98,6 +113,11 @@ Ext.define('Melisa.core.Module', {
     onFailureGetConfigModule: function() {
         
         console.log('onFailureGetConfigModule', arguments);
+        if( Ext.platformTags.modern) {
+            
+            Ext.Viewport.setMasked(false);
+            
+        }
         
     },
     

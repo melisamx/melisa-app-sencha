@@ -104,13 +104,13 @@ Ext.define('Melisa.core.module.Manager', {
             
         }
         
-        module.initModule();
-        
         if( Ext.platformTags.modern) {
             
             Ext.Viewport.setMasked(false);
             
         }
+        
+        module.initModule();
         
         return module;
         

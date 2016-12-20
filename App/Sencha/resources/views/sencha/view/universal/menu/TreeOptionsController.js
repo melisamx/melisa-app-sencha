@@ -1,5 +1,9 @@
 Ext.define('Melisa.view.universal.menu.TreeOptionsController', {
     extend: 'Ext.app.ViewController',
+    
+    requires: [
+        'Melisa.core.module.Manager'
+    ],
    
     alias: 'controller.apppaneltreeoptions',
    
