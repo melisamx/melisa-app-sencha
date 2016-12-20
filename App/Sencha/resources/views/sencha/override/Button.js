@@ -1,26 +1,12 @@
-
-Ext.override(Ext.Button, {
+Ext.define('Melisa.override.Button', {
+    override: 'Ext.Button',
     
-    initialize: function() {
-        
-        this.callParent();
-        
-        if( !Waves) {
-            
-            return;
-            
-        }
-        
-        /* preferible ya que termina usando waves-circle cuando se especifica
-         * ui en la configuracion
-         */
-        this.element.addCls('waves-effect waves-circle');
-        
-        Waves.attach(this.element.dom);
-        Waves.init();
-        
-    }
+    config: {
+        melisa: null
+    },
+    
+    publishes: [
+        'melisa'
+    ]
     
 });
-
-Ext.define('Melisa.override.Button', {});

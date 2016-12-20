@@ -16,7 +16,7 @@ Ext.define('Melisa.core.module.Manager', {
         var me = this,
             module = me.modules[nameSpace],
             result;
-        console.log(module);
+        
         if( !module) {
             
             me.log('no exist module', me.modules);
@@ -59,7 +59,23 @@ Ext.define('Melisa.core.module.Manager', {
     register: function(moduleConfig, callback) {
         
         var me = this,
-            module = me.modules[moduleConfig.nameSpace];
+            module;
+    
+        if( !moduleConfig) {
+            
+            me.log('invalid config module');
+            return false;
+            
+        }
+    
+        if(typeof moduleConfig.nameSpace === 'undefined') {
+            
+            me.log('no specific namespace module', moduleConfig);
+            return false;
+            
+        }
+        
+        module = me.modules[moduleConfig.nameSpace];
         
         if( module) {
             
@@ -123,7 +139,7 @@ Ext.define('Melisa.core.module.Manager', {
     
         if( !module) {
             
-            me.log('class is loading', moduleConfig.nameSpace);
+            me.log('class is loading or invalid', moduleConfig);
             return;
             
         }

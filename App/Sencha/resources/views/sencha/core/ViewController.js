@@ -34,7 +34,21 @@ Ext.define('Melisa.core.ViewController', {
     
     activateMainModule: function() {
         
-        this.activateModule();
+        var me = this,
+            view = me.getView(),
+            lastModule = view.getLastModule();
+        
+        me.activateModule(lastModule);
+        
+        if( !lastModule) {
+            
+            return;
+            
+        }
+        
+        view.setLastModule(null);
+        /* necesary change url */
+        lastModule.redirectToModule();
         
     },
     
@@ -51,15 +65,21 @@ Ext.define('Melisa.core.ViewController', {
                 single: true
             };
         
+        if( Ext.getClassName(config) === 'Ext.Button') {
+            
+            config = config.getMelisa();
+            
+        }
+        
         if( !Ext.isFunction(callbackOnReady)) {
             
-            callbackOnReady = Ext.emptyFn;
+            callbackOnReady = me.onActivateModule;
             
         }
         
         if( !Ext.isFunction(callbackOnReboot)) {
             
-            callbackOnReboot = Ext.emptyFn;
+            callbackOnReboot = me.onActivateModule;
             
         }
         
@@ -68,20 +88,27 @@ Ext.define('Melisa.core.ViewController', {
             options.args = Ext.isArray(params) ? params : [ params ];
             
         }
-                
+        
         Melisa.core.module.Manager.launch(config, function(module) {
             
             if( module.getIsReady()) {
                 
-                module.on('reboot', callbackOnReady, scope | me, options);
+                module.on('reboot', callbackOnReady, scope || me, options);
                 
             } else {
                 
-                module.on('ready', callbackOnReboot, scope | me, options);
+                module.on('ready', callbackOnReboot, scope || me, options);
                 
             }
             
         });
+        
+    },
+    
+    onActivateModule: function(module) {
+        
+        module.setLastModule(this.getView());
+        Ext.GlobalEvents.fireEvent('activatemodule', module);
         
     }
         

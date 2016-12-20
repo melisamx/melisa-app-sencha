@@ -11,6 +11,7 @@ Ext.define('Melisa.core.Application', {
     requires: [
         'Melisa.override.form.field.Text',
         'Melisa.override.form.Panel',
+        'Melisa.override.Button',
         'Melisa.core.Logger',
         'Melisa.core.AutoOpenModule',
         'Melisa.core.ProfileDesktop',

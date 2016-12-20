@@ -12,7 +12,8 @@ Ext.define('Melisa.core.Module', {
     config: {
         initialized: false,
         isReady: false,
-        configModule: {}
+        configModule: {},
+        lastModule: null
     },
     
     initModule: function() {
