@@ -9,7 +9,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Application Sencha Test Suite">
+        <testsuite name="Application Sencha Test">
             <directory suffix="Test.php">./App/Sencha/tests</directory>
         </testsuite>
     </testsuites>

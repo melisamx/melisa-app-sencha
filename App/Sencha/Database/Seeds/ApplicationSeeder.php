@@ -1,9 +1,8 @@
 <?php namespace App\Sencha\Database\Seeds;
 
-use Illuminate\Database\Seeder;
-use Melisa\Laravel\Database\InstallApplication;
+use Melisa\Laravel\Database\InstallSeeder;
 
-class ApplicationSeeder extends Seeder
+class ApplicationSeeder extends InstallSeeder
 {    
     use InstallApplication;
     
