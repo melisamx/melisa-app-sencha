@@ -27,19 +27,28 @@ Ext.define('Melisa.ux.Socket', {
         
         if( typeof io === 'undefined') {
             
+            me.log('no socket io library');
             return false;
             
         }
         
         socket = io(url || Ext.manifest.melisa.urls.realtime);
-        
         me.setSocket(socket);
         me.setIsConnected(true);
-        
+        socket.on('connect', me.onConnect.bind(me));
         socket.on('disconnect', me.onDisconnect.bind(me));
         socket.on('reconnect', me.onReconnect.bind(me));
         
         return me;
+        
+    },
+    
+    onConnect: function() {
+        
+        var me = this;
+        
+        me.log('on connected server');
+        me.fireEvent('connect', me.getSocket(), me);
         
     },
     
