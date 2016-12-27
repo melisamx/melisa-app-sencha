@@ -8,10 +8,18 @@ Ext.define('Melisa.core.Application', {
         'Melisa.App'
     ],
     
-    requires: [
+    requires: Ext.platformTags.modern ? [
         'Melisa.override.form.field.Text',
         'Melisa.override.form.Panel',
         'Melisa.override.Button',
+        'Melisa.override.plugin.PullRefresh',
+        'Melisa.override.plugin.ListPaging',
+        'Melisa.core.Logger',
+        'Melisa.core.AutoOpenModule',
+        'Melisa.core.ProfileDesktop',
+        'Melisa.core.ProfilePhone',
+        'Melisa.core.ViewController'
+    ] : [
         'Melisa.core.Logger',
         'Melisa.core.AutoOpenModule',
         'Melisa.core.ProfileDesktop',
