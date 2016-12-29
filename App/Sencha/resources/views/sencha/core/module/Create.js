@@ -4,35 +4,38 @@ Ext.define('Melisa.core.module.Create', {
         
         var me = this,
             view = me.getView(),
-            model = me.getViewModel(),
-            form = view.down('form');
+            model = me.getViewModel();
         
-        if( !form.isValid()) {
+        view.submit({
+            /* necesary use bind, scope use me.setMasked */
+            success: me.onSuccessSubmit.bind(me),
+            failure: me.onErrorSubmit.bind(me),
+            waitMsg: model.get('i18n.saving'),
             
-            return false;
-            
-        }
-        
-        view.setLoading(model.get('i18n.frmMessageLoading'));
-        
-        form.submit({
-            url: model.get('urlSubmit'),
-            success: me.onSuccessSubmit,
-            failure: me.onErrorSubmit,
-            scope: me
+            /* necesary laravel csrf */
+            headers: {
+                'X-CSRF-TOKEN': model.get('token')
+            }
         });
         
     },
     
-    onSuccessSubmit: function() {},
-    
-    onErrorSubmit: function() {
-        
+    onSuccessSubmit: function() {
+        console.log('onSuccessSubmit');
         var me = this,
             view = me.getView();
         
-        view.setLoading(false);
-                
+        view.reset();
+        
+    },
+    
+    onErrorSubmit: function() {
+        console.log('onErrorSubmit');
+        var me = this,
+            view = me.getView();
+        console.log(view);
+//        view.setMasked(false);
+             
     }
     
 });
