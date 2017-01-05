@@ -30,11 +30,11 @@ Ext.define('Melisa.core.module.Create', {
     },
     
     onErrorSubmit: function() {
-        console.log('onErrorSubmit');
+        
+        console.log('onErrorSubmit', arguments);
+        
         var me = this,
             view = me.getView();
-        console.log(view);
-//        view.setMasked(false);
              
     }
     

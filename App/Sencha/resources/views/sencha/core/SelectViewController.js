@@ -8,6 +8,12 @@ Ext.define('Melisa.core.SelectViewController', {
     
     mixins: [
         'Melisa.core.module.Select'
-    ]
+    ],
+    
+    control: {
+        '#': {
+            display: 'onDisplay'
+        }
+    }
         
 });
