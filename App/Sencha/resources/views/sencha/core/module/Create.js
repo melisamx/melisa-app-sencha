@@ -22,12 +22,13 @@ Ext.define('Melisa.core.module.Create', {
         
     },
     
-    onSuccessSubmit: function() {
+    onSuccessSubmit: function(response) {
         console.log('onSuccessSubmit');
         var me = this,
             view = me.getView();
         
         view.reset();
+        view.fireEvent('successsubmit', response);
         
     },
     
