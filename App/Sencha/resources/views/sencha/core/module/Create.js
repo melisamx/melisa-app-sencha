@@ -6,6 +6,19 @@ Ext.define('Melisa.core.module.Create', {
             view = me.getView(),
             model = me.getViewModel();
         
+        me.submitForm(view, model, extraParams, params);
+        
+    },
+    
+    submitForm: function(view, model, extraParams, params) {
+        
+        var me = this;
+        
+        if( !Ext.platformTags.modern &&  !view.isValid()) {
+            console.log('formulario invalido');
+            return false;
+        }
+        
         view.submit({
             url: Ext.platformTags.modern ? view.getUrl() : view.getForm().url,
             /* necesary use bind, scope use me.setMasked */
@@ -32,13 +45,15 @@ Ext.define('Melisa.core.module.Create', {
         
     },
     
-    onErrorSubmit: function() {
+    onErrorSubmit: function(form, action) {
         
         console.log('onErrorSubmit', arguments);
         
         var me = this,
             view = me.getView();
              
+        view.fireEvent('errorsubmit', form, action);
+        
     }
     
 });

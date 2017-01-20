@@ -10,10 +10,11 @@ Ext.define('Melisa.core.Module', {
     ],
     
     config: {
+        configModule: {},
         initialized: false,
         isReady: false,
-        configModule: {},
-        lastModule: null
+        lastModule: null,
+        isAutoShow: true
     },
     
     initModule: function() {
@@ -177,7 +178,7 @@ Ext.define('Melisa.core.Module', {
         
         console.log('reboot', arguments);
         
-        if( Ext.platformTags.classic) {
+        if( Ext.platformTags.classic && me.getIsAutoShow()) {
             
             /* necesary or never show */
             me.getEl().removeCls('x-hidden-offsets');

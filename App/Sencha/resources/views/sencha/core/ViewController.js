@@ -17,7 +17,7 @@ Ext.define('Melisa.core.ViewController', {
         var me = this,
             view = me.getView(),
             renderEvent = Ext.platformTags.modern ? 'painted' : 'render';
-    
+        console.log(Ext.getClassName(view.superclass));
         view.on(renderEvent, me.onRender, me, {
             single: true
         });
@@ -63,52 +63,94 @@ Ext.define('Melisa.core.ViewController', {
         var me = this,
             options = {
                 single: true
-            };
+            },
+            className = Ext.getClassName(config),
+            launcher;
         
-        if( Ext.getClassName(config) === 'Ext.Button') {
-            
+        if( className === 'Ext.Button' || className === 'Ext.button.Button') {
+            launcher = config;
             config = config.getMelisa();
-            
-        }
-        
-        if( !Ext.isFunction(callbackOnReady)) {
-            
-            callbackOnReady = me.onActivateModule;
-            
-        }
-        
-        if( !Ext.isFunction(callbackOnReboot)) {
-            
-            callbackOnReboot = me.onActivateModule;
-            
         }
         
         if( params) {
-            
-            options.args = Ext.isArray(params) ? params : [ params ];
-            
+            options.args = Ext.isArray(params) ? params : [ params ];            
         }
         
-        Melisa.core.module.Manager.launch(config, function(module) {
-            
-            if( module.getIsReady()) {
-                
-                module.on('reboot', callbackOnReady, scope || me, options);
-                
-            } else {
-                
-                module.on('ready', callbackOnReboot, scope || me, options);
-                
-            }
-            
-        });
+        Melisa.core.module.Manager.launch(config, Ext.bind(me.onLaunchModule, me, [{
+            launcher: launcher,
+            params: params,
+            scope: scope,
+            callbackOnReady: Ext.isFunction(callbackOnReady) ? callbackOnReady : Ext.emptyFn,
+            callbackOnReboot: Ext.isFunction(callbackOnReboot) ? callbackOnReboot : Ext.emptyFn
+        }], 0));
         
     },
     
-    onActivateModule: function(module) {
+    onLaunchModule: function(options, module) {
         
-        module.setLastModule(this.getView());
-        Ext.GlobalEvents.fireEvent('activatemodule', module);
+        var me = this;
+        
+        if( module.getIsReady()) {
+            module.on('reboot', Ext.bind(me.onLaunchModuleReboot, me, [ options ], 0), me, {
+                single: true
+            });
+        } else {
+            module.on('ready', Ext.bind(me.onLaunchModuleReady, me, [ options ], 0), me, {
+                single: true
+            });
+        }
+        
+    },
+    
+    onLaunchModuleReboot: function(options, module) {
+        
+        var me = this;
+        
+        me.fireModuleLoaded(options, module);
+        me.onActivateModule(options, module);
+        
+    },
+    
+    onLaunchModuleReady: function(options, module) {
+        
+        var me = this;
+        
+        me.fireModuleLoaded(options, module);
+        me.onActivateModule(options, module);
+        
+    },
+    
+    fireModuleLoaded: function(options, module) {
+        
+        var me = this,
+            className = Ext.getClassName(options.launcher);
+    
+        module.setLastModule(me.getView());
+        
+        if( Ext.isFunction(options.callbackOnReady)) {
+            Ext.callback(options.callbackOnReady, me, [ module, options ]);
+        }
+        
+        if( className === 'Ext.Button' || className === 'Ext.button.Button') {
+            options.launcher.fireEvent('loaded', module, options);
+        }
+        
+    },
+    
+    onActivateModule: function(options, module) {
+        
+        var me = this;
+        
+        me.log('onActivateModule', arguments);
+        
+        if( !me.fireEvent('beforeactivatemodule', module)) {
+            console.log('cancel activate module');
+            return;
+        }
+        
+        if( module.getIsAutoShow()) {
+            Ext.GlobalEvents.fireEvent('activatemodule', module);
+        }
         
     }
         
