@@ -1,5 +1,5 @@
 Ext.define('Melisa.view.phone.window.delete.WithIframe', {
-    extend: 'Ext.Container',
+    extend: 'Ext.form.Panel',
     
     requires: [
         'Melisa.view.phone.window.delete.WithIframeController',
@@ -62,6 +62,9 @@ Ext.define('Melisa.view.phone.window.delete.WithIframe', {
             }
         }
     },
+    bind: {
+        url: '{modules.submit}'
+    },
     items: [
         {
             xtype: 'titlebar',
@@ -78,25 +81,13 @@ Ext.define('Melisa.view.phone.window.delete.WithIframe', {
                 }
             ]
         },
-        {
-            xtype: 'formpanel',
-            bind: {
-                url: '{modules.submit}'
-            },
-            layout: {
-                type: 'vbox',
-                align: 'stretch'
-            },
-            items: [
-//                {
-//                    xtype: 'uxiframe',
-//                    flex: 1,
-//                    bind: {
-//                        src: '{report}'
-//                    }
-//                }
-            ]
-        },
+//        {
+//            xtype: 'uxiframe',
+//            flex: 1,
+//            bind: {
+//                src: '{report}'
+//            }            
+//        },
         {
             xtype: 'titlebar',
             docked: 'bottom',

@@ -113,7 +113,7 @@ Ext.define('Melisa.view.universal.window.delete.WithIframeController', {
     appendFieldsHidden: function() {
         
         var me = this,
-            form = me.getView().down(Ext.platformTags.modern ? 'formpanel' : 'form'),
+            form = me.getForm(),
             vm = me.getViewModel(),
             fieldsHidden = vm.get('fieldsHidden');
         
@@ -141,15 +141,23 @@ Ext.define('Melisa.view.universal.window.delete.WithIframeController', {
         
     },
     
+    getForm: function() {
+        
+        if( Ext.platformTags.modern) {
+            return this.getView();
+        } else {
+            return this.getView().down('form');
+        }
+        
+    },
+    
     save: function(extraParams, params) {
         
         var me = this,
-            view = me.getView().down(Ext.platformTags.modern ? 'formpanel' : 'form'),
+            form = me.getForm(),
             vm = me.getViewModel();
         
-        view.getForm().url = vm.get('modules.submit');
-        
-        me.submitForm(view, vm, extraParams, params);
+        me.submitForm(form, vm, extraParams, params);
         
     },
     
@@ -157,7 +165,7 @@ Ext.define('Melisa.view.universal.window.delete.WithIframeController', {
         
         var me = this,
             view = me.getView(),
-            form = view.down(Ext.platformTags.modern ? 'formpanel' : 'form');
+            form = me.getForm();
         
         form.reset();
         view.fireEvent('successsubmit', response);

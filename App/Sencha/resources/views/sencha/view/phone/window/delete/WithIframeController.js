@@ -18,16 +18,6 @@ Ext.define('Melisa.view.phone.window.delete.WithIframeController', {
         
         this.activateMainModule();
         
-    },
-    
-    save: function(extraParams, params) {
-        
-        var me = this,
-            view = me.getView().down('formpanel'),
-            vm = me.getViewModel();
-        
-        me.submitForm(view, vm, extraParams, params);
-        
     }
     
 });
