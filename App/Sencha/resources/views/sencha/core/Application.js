@@ -14,6 +14,7 @@ Ext.define('Melisa.core.Application', {
         'Melisa.override.Button',
         'Melisa.override.plugin.PullRefresh',
         'Melisa.override.plugin.ListPaging',
+        'Melisa.override.ux.Iframe',
         'Melisa.core.Logger',
         'Melisa.core.AutoOpenModule',
         'Melisa.core.ProfileDesktop',

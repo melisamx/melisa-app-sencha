@@ -1,4 +1,4 @@
-Ext.define('Melisa.view.desktop.window.delete.WithIframeController', {
+Ext.define('Melisa.view.phone.window.delete.WithIframeController', {
     extend: 'Melisa.view.universal.window.delete.WithIframeController',
     alias: 'controller.windowdeletecontroller',
     
@@ -6,25 +6,26 @@ Ext.define('Melisa.view.desktop.window.delete.WithIframeController', {
         'Melisa.view.universal.window.delete.WithIframeController'
     ],
     
-    showLoadingMessage: function(message) {
+    showLoadingMessage: function() {
         
-        this.getView().setLoading(message);     
+        var me = this;
+        
+        me.activateModule(me.getView());
         
     },
     
     closeWindow: function() {
         
-        this.getView().close();
+        this.activateMainModule();
         
     },
     
     save: function(extraParams, params) {
         
         var me = this,
-            view = me.getView().down('form'),
+            view = me.getView().down('formpanel'),
             vm = me.getViewModel();
-    
-        view.getForm().url = vm.get('modules.submit');
+        
         me.submitForm(view, vm, extraParams, params);
         
     }

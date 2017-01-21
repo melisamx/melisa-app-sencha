@@ -19,7 +19,7 @@ Ext.define('Melisa.view.phone.pitcher.ButtonController', {
         
         var me = this;
         
-        me.moduleRun(button, me.onPitcherReady.bind(me), me.onPitcherReady.bind(me));
+        me.moduleRun(button, Ext.bind(me.onPitcherReady, me), Ext.bind(me.onPitcherReady, me));
         
     },
     
