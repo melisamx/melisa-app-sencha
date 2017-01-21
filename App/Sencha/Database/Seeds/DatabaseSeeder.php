@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
     {
                 
         $this->call(ApplicationSeeder::class);
+        $this->call(AssetsSeeder::class);
         
     }
     
