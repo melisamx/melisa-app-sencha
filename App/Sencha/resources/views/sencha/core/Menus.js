@@ -59,6 +59,12 @@ Ext.define('Melisa.core.Menus', {
             }
             
             me.createStructOption(option, configMenu);
+            
+            if( typeof option.module!== 'undefined' && !option.module.allowed) {
+                me.log('ignore option is not allowed', option);
+                return true;
+            }
+            
             menuStruct.push(option);
             
         });

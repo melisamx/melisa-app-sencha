@@ -74,18 +74,19 @@ Ext.define('Melisa.core.Module', {
         
         var me = this,
             config = Ext.decode(request.responseText, true);
-    
-        if( Ext.platformTags.modern) {
-            
-            Ext.Viewport.setMasked(false);
-            
+        
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked(false);            
         }
         
-        if( !config || typeof config.data === 'undefined') {
-            
-            me.fireEvent('errorgetconfig', request);
+        if( !config.success) {
+            console.log('error get module', config);
             return;
-            
+        }
+        
+        if( !config || typeof config.data === 'undefined') {            
+            me.fireEvent('errorgetconfig', request);
+            return;            
         }
         
         if( Ext.isArray(config.assets)) {
