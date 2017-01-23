@@ -31,7 +31,7 @@ Ext.define('Melisa.core.Menus', {
             menuStruct = [],
             sourceChildren = me.getSourceChildren(),
             propertyChildren = me.getPropertyChildren();
-    
+        
         if( !Array.isArray(options)) {
             
             options = [ options ];
@@ -51,6 +51,11 @@ Ext.define('Melisa.core.Menus', {
                     
                     delete option[sourceChildren];
                     
+                }
+                
+                if( Ext.isEmpty(option[propertyChildren])) {
+                    me.log('Menu without privileged options', option);
+                    return true;
                 }
                 
                 menuStruct.push(option);
