@@ -3,7 +3,8 @@ Ext.define('Melisa.ux.grid.Filters', {
     alias: 'plugin.autofilters',
     
     requires: [
-        'Melisa.ux.field.StoreFilter'
+        'Melisa.ux.field.StoreFilter',
+        'Melisa.view.desktop.ComboBoolean'
     ],
     
     config: {
