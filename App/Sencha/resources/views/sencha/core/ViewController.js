@@ -17,7 +17,7 @@ Ext.define('Melisa.core.ViewController', {
         var me = this,
             view = me.getView(),
             renderEvent = Ext.platformTags.modern ? 'painted' : 'render';
-        console.log(Ext.getClassName(view.superclass));
+        
         view.on(renderEvent, me.onRender, me, {
             single: true
         });
@@ -61,13 +61,18 @@ Ext.define('Melisa.core.ViewController', {
     moduleRun: function(config, callbackOnReady, callbackOnReboot, params, scope) {
         
         var me = this,
+            classHandlers = [
+                'Ext.Button',
+                'Ext.button.Button',
+                'Ext.form.field.Text'
+            ],
             options = {
                 single: true
             },
             className = Ext.getClassName(config),
             launcher;
         
-        if( className === 'Ext.Button' || className === 'Ext.button.Button') {
+        if( classHandlers.indexOf(className) !== -1) {
             launcher = config;
             config = config.getMelisa();
         }
@@ -123,6 +128,11 @@ Ext.define('Melisa.core.ViewController', {
     fireModuleLoaded: function(options, module) {
         
         var me = this,
+            classHandlers = [
+                'Ext.Button',
+                'Ext.button.Button',
+                'Ext.form.field.Text'
+            ],
             className = Ext.getClassName(options.launcher);
     
         module.setLastModule(me.getView());
@@ -131,7 +141,7 @@ Ext.define('Melisa.core.ViewController', {
             Ext.callback(options.callbackOnReady, me, [ module, options ]);
         }
         
-        if( className === 'Ext.Button' || className === 'Ext.button.Button') {
+        if( classHandlers.indexOf(className) !== -1) {
             options.launcher.fireEvent('loaded', module, options);
         }
         

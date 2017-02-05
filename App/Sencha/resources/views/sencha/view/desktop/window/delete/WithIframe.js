@@ -56,6 +56,8 @@ Ext.define('Melisa.view.desktop.window.delete.WithIframe', {
             },
             
             report: {
+                /* is necesary, detect changes in id */
+                bind: '{id}',
                 get: function() {
                     
                     var vm = this;

@@ -3,7 +3,7 @@ Ext.define('Melisa.view.phone.window.delete.WithIframe', {
     
     requires: [
         'Melisa.view.phone.window.delete.WithIframeController',
-        'Ext.ux.IFrame',
+        'Melisa.view.phone.Iframe',
         'Melisa.core.Module'
     ],
     
@@ -16,6 +16,8 @@ Ext.define('Melisa.view.phone.window.delete.WithIframe', {
     },
     
     controller: 'windowdeletecontroller',
+    layout: 'fit',
+    bodyPadding: 0,
     viewModel: {
         formulas: {
             messageloading: {
@@ -51,14 +53,8 @@ Ext.define('Melisa.view.phone.window.delete.WithIframe', {
                 
             },
             
-            report: {
-                get: function() {
-                    
-                    var vm = this;
-                    
-                    return vm.get('modules.report') + vm.get('id') + '/html/';
-                    
-                }
+            report: function(get) {
+                return get('modules.report') + get('id') + '/html/';
             }
         }
     },
@@ -81,13 +77,13 @@ Ext.define('Melisa.view.phone.window.delete.WithIframe', {
                 }
             ]
         },
-//        {
-//            xtype: 'uxiframe',
-//            flex: 1,
-//            bind: {
-//                src: '{report}'
-//            }            
-//        },
+        {
+            xtype: 'uxiframe',
+            flex: 1,
+            bind: {
+                src: '{report}'
+            }            
+        },
         {
             xtype: 'titlebar',
             docked: 'bottom',
