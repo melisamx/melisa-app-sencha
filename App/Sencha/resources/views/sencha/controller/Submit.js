@@ -1,4 +1,14 @@
-Ext.define('Melisa.core.module.Create', {
+Ext.define('Melisa.controller.Submit', {
+    
+    getForm: function() {
+        
+        if( Ext.platformTags.modern) {
+            return this.getView();
+        } else {
+            return this.getView().down('form');
+        }
+        
+    },
     
     save: function(extraParams, params) {
         
@@ -45,10 +55,8 @@ Ext.define('Melisa.core.module.Create', {
         
     },
     
-    onErrorSubmit: function(form, action) {
-        
-        console.log('onErrorSubmit', arguments);
-        
+    onErrorSubmit: function(form, action) {        
+        console.log('onErrorSubmit', arguments);        
         var me = this,
             view = me.getView();
              

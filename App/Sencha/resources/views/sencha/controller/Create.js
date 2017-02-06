@@ -4,16 +4,32 @@ Ext.define('Melisa.controller.Create', {
     
     requires: [
         'Melisa.core.ViewController',
-        'Melisa.core.module.Create'
+        'Melisa.controller.Submit'
     ],
     
-    mixins: [
-        'Melisa.core.module.Create'
-    ],
+    mixins: {
+        submit: 'Melisa.controller.Submit'
+    },
     
-    onRender: function() {
+    init: function() {
         
-        this.getView().getForm().url = this.getViewModel().get('modules.create');
+        var me = this,
+            view = me.getView();
+        
+        me.callParent(arguments);
+        
+        if( Ext.platformTags.modern) {
+            return;
+        }
+        
+        view.on('ready', me.onReady, me)
+        
+    },
+    
+    onReady: function () {
+        
+        var me = this;
+        me.getView().getForm().url = me.getViewModel().get('modules.submit');
         
     }
     
