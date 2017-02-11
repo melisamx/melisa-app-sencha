@@ -44,6 +44,7 @@ module.exports = function(grunt) {
                         '<%= pkg.sencha %>core/ViewController.js',
                         '<%= pkg.sencha %>core/module/Create.js',
                         '<%= pkg.sencha %>core/Application.js',
+                        '<%= pkg.sencha %>view/desktop/wrapper/Default.js',
                     ],
                     '<%= pkg.output %>js/melisa-sencha-modern.min.js': [
                         '<%= pkg.sencha %>override/Button.js',
