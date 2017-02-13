@@ -13,7 +13,7 @@ class ApplicationSeeder extends InstallSeeder
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.0.2',
+            'version'=>'1.0.1',
         ]);
         
     }
