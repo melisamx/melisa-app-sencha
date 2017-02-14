@@ -45,6 +45,10 @@ module.exports = function(grunt) {
                         '<%= pkg.sencha %>core/module/Create.js',
                         '<%= pkg.sencha %>core/Application.js',
                         '<%= pkg.sencha %>view/desktop/wrapper/Default.js',
+                        '<%= pkg.sencha %>view/desktop/toolbar/Default.js',
+                        '<%= pkg.sencha %>view/desktop/ComboBoolean.js',
+                        '<%= pkg.sencha %>view/desktop/ComboDefault.js',
+                        '<%= pkg.sencha %>view/desktop/ComboSex.js',
                     ],
                     '<%= pkg.output %>js/melisa-sencha-modern.min.js': [
                         '<%= pkg.sencha %>override/Button.js',

@@ -32,7 +32,11 @@ Ext.define('Melisa.core.Application', {
         'Melisa.core.ProfileDesktop',
         'Melisa.core.ProfilePhone',
         'Melisa.core.ViewController',
-        'Melisa.view.desktop.wrapper.Default'
+        'Melisa.view.desktop.wrapper.Default',
+        'Melisa.view.desktop.toolbar.Default',
+        'Melisa.view.desktop.ComboBoolean',
+        'Melisa.view.desktop.ComboDefault',
+        'Melisa.view.desktop.ComboSex'
     ],
     
     launch: function() {

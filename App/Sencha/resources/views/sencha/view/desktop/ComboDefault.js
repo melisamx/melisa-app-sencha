@@ -1,6 +1,6 @@
-Ext.define('Melisa.view.desktop.ComboBoolean', {
+Ext.define('Melisa.view.desktop.ComboDefault', {
     extend: 'Ext.form.field.ComboBox',
-    alias: 'widget.comboboolean',
+    alias: 'widget.combodefault',
     
     displayField: 'name',
     minChars: 1,
@@ -11,17 +11,7 @@ Ext.define('Melisa.view.desktop.ComboBoolean', {
         fields: [ 'id', 'name' ],
         proxy: {
             type: 'memory'
-        },
-        data: [
-            {
-                id: 1,
-                name: 'Si'
-            },
-            {
-                id: 0,
-                name: 'No'
-            }
-        ]
+        }
     })
     
 });
