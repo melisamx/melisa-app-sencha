@@ -12,6 +12,15 @@ Ext.define('Melisa.core.ViewController', {
         'Melisa.core.Base'
     ],
     
+    config: {
+        handlersClass: [
+            'Ext.Button',
+            'Ext.button.Button',
+            'Ext.form.field.Text',
+            'Ext.form.field.ComboBox'
+        ]
+    },
+    
     init: function() {
         
         var me = this,
@@ -61,11 +70,7 @@ Ext.define('Melisa.core.ViewController', {
     moduleRun: function(config, callbackOnReady, callbackOnReboot, params, scope) {
         
         var me = this,
-            classHandlers = [
-                'Ext.Button',
-                'Ext.button.Button',
-                'Ext.form.field.Text'
-            ],
+            classHandlers = me.getHandlersClass(),
             options = {
                 single: true
             },
@@ -128,11 +133,7 @@ Ext.define('Melisa.core.ViewController', {
     fireModuleLoaded: function(options, module) {
         
         var me = this,
-            classHandlers = [
-                'Ext.Button',
-                'Ext.button.Button',
-                'Ext.form.field.Text'
-            ],
+            classHandlers = me.getHandlersClass(),
             className = Ext.getClassName(options.launcher);
     
         module.setLastModule(me.getView());
@@ -160,6 +161,8 @@ Ext.define('Melisa.core.ViewController', {
         
         if( module.getIsAutoShow()) {
             Ext.GlobalEvents.fireEvent('activatemodule', module);
+        } else {
+            console.log('no auto show module', module);
         }
         
     }

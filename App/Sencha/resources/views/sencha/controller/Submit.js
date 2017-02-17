@@ -16,6 +16,10 @@ Ext.define('Melisa.controller.Submit', {
             view = me.getView(),
             model = me.getViewModel();
         
+        if( typeof view.isWindow !== 'undefined' && view.isWindow) {
+            view = view.down('form');
+        }
+        
         me.submitForm(view, model, extraParams, params);
         
     },
@@ -49,6 +53,10 @@ Ext.define('Melisa.controller.Submit', {
         console.log('onSuccessSubmit');
         var me = this,
             view = me.getView();
+    
+        if( typeof view.isWindow !== 'undefined' && view.isWindow) {
+            view = view.down('form');
+        }
         
         view.reset();
         view.fireEvent('successsubmit', response);
