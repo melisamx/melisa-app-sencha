@@ -50,16 +50,27 @@ Ext.define('Melisa.controller.Submit', {
     },
     
     onSuccessSubmit: function(response) {
-        console.log('onSuccessSubmit');
+        
         var me = this,
-            view = me.getView();
-    
+            view = me.getView(),
+            event = {
+                autoClose: true
+            };
+        console.log('onSuccessSubmit');    
+        if(typeof view.getAutoClose === 'function') {
+            autoClose = view.getAutoClose();
+        }
+        
         if( typeof view.isWindow !== 'undefined' && view.isWindow) {
             view = view.down('form');
         }
         
         view.reset();
-        view.fireEvent('successsubmit', response);
+        view.fireEvent('successsubmit', event, response);
+        
+        if( event.autoClose) {
+            me.getView().close();
+        }
         
     },
     
