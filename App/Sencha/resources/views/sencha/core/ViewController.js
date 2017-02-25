@@ -17,7 +17,8 @@ Ext.define('Melisa.core.ViewController', {
             'Ext.Button',
             'Ext.button.Button',
             'Ext.form.field.Text',
-            'Ext.form.field.ComboBox'
+            'Ext.form.field.ComboBox',
+            'Melisa.view.desktop.ComboDefault'
         ]
     },
     
