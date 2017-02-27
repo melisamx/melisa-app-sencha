@@ -97,7 +97,7 @@ Ext.define('Melisa.ux.grid.Filters', {
     onReconfigureGrid: function(grid, store) {
         
         var me = this;
-        
+
         Ext.each(me.getFields(), function(field) {
             
             field.getPlugin('fieldstorefilter').setStore(store);
