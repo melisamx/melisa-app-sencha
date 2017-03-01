@@ -49,7 +49,7 @@ Ext.define('Melisa.controller.Submit', {
         
     },
     
-    onSuccessSubmit: function(response) {
+    onSuccessSubmit: function(response, action) {
         
         var me = this,
             view = me.getView(),
@@ -66,7 +66,7 @@ Ext.define('Melisa.controller.Submit', {
         }
         
         view.reset();
-        view.fireEvent('successsubmit', event, response);
+        view.fireEvent('successsubmit', event, response, action);
         
         if( event.autoClose) {
             me.getView().close();

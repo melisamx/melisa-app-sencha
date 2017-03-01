@@ -37,14 +37,17 @@ Ext.define('Melisa.view.universal.window.confirmation.WithReportController', {
         
     },
     
-    onSuccessSubmit: function(response) {
+    onSuccessSubmit: function(response, action) {
         
         var me = this,
             view = me.getView(),
-            form = me.getForm();
+            form = me.getForm(),
+            event = {
+                autoClose: true
+            };
         
         form.reset();
-        view.fireEvent('successsubmit', response);
+        view.fireEvent('successsubmit', event, response, action);
         me.closeWindow();
         
     },
