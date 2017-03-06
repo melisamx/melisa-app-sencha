@@ -3,7 +3,7 @@ Ext.define('Melisa.controller.Update', {
     onSuccessLoadData: function (data) {
         
         var me = this,
-            form = me.getForm();
+            form = me.getViewForm();
         
         me.appendFieldsHidden();
         

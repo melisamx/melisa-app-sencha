@@ -3,11 +3,11 @@ Ext.define('Melisa.override.form.field.Checkbox', {
     
     labelAlign: 'top',
     uncheckedValue: 0,
-    
+    /* default submit 'on' */
+    inputValue: 1,    
     config: {
         melisa: null
-    },
-    
+    },    
     publishes: [
         'melisa'
     ]

@@ -29,13 +29,11 @@ Ext.define('Melisa.controller.Create', {
     onReady: function () {
         
         var me = this,
-            view = me.getView(),
-            form = typeof view.getForm === 'function' ? view.getForm() : null;
+            form = me.getViewForm();
         
-        if( !form) {
-            form = Ext.platformTags.modern ? 
-                view.down('form') : 
-                view.down('form').getForm();
+        
+        if( !Ext.platformTags.modern) {
+            form = form.getForm();
         }
         
         form.url = me.getViewModel().get('modules.submit');

@@ -3,7 +3,7 @@ Ext.define('Melisa.controller.AppendFields', {
     appendFieldsHidden: function() {
         
         var me = this,
-            form = me.getForm(),
+            form = me.getViewForm(),
             vm = me.getViewModel(),
             fieldsHidden = vm.get('fieldsHidden');
         

@@ -26,6 +26,8 @@ Ext.define('Melisa.core.Application', {
         'Melisa.override.form.field.Text',
         'Melisa.override.form.field.ComboBox',
         'Melisa.override.form.field.Checkbox',
+        'Melisa.override.form.field.DateField',
+        'Melisa.override.window.Window',
         'Melisa.util.Format',
         'Melisa.override.ux.Iframe',
         'Melisa.core.Logger',

@@ -1,26 +1,25 @@
 Ext.define('Melisa.controller.Submit', {
     
-    getForm: function() {
+    getViewForm: function() {
         
-        if( Ext.platformTags.modern) {
-            return this.getView();
-        } else {
-            return this.getView().down('form');
+        var me = this,
+            view = me.getView(),
+            form = typeof view.getForm === 'function' ? view.getForm() : null;
+    
+        if( form) {
+            return view;
         }
+        
+        return view.down('form');
         
     },
     
     save: function(extraParams, params) {
         
         var me = this,
-            view = me.getView(),
             model = me.getViewModel();
         
-        if( typeof view.isWindow !== 'undefined' && view.isWindow) {
-            view = view.down('form');
-        }
-        
-        me.submitForm(view, model, extraParams, params);
+        me.submitForm(me.getViewForm(), model, extraParams, params);
         
     },
     
@@ -53,6 +52,7 @@ Ext.define('Melisa.controller.Submit', {
         
         var me = this,
             view = me.getView(),
+            form = me.getViewForm(),
             event = {
                 autoClose: true
             };
@@ -61,15 +61,11 @@ Ext.define('Melisa.controller.Submit', {
             autoClose = view.getAutoClose();
         }
         
-        if( typeof view.isWindow !== 'undefined' && view.isWindow) {
-            view = view.down('form');
-        }
-        
-        view.reset();
+        form.reset();
         view.fireEvent('successsubmit', event, response, action);
         
         if( event.autoClose) {
-            me.getView().close();
+            view.close();
         }
         
     },
