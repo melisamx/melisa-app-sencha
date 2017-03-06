@@ -60,7 +60,9 @@ Ext.define('Melisa.ux.FloatingButton', {
     createButton: function(config) {
         return Ext.applyIf(config, {
             xtype: 'button',
-            floating: true
+            floating: true,
+            shadow: false,
+            cls: 'floating-button'
         });
     }
     
