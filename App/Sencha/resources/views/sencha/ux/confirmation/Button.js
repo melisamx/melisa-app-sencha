@@ -30,12 +30,12 @@ Ext.define('Melisa.ux.confirmation.Button', {
     onClickBtnConfirmation: function() {
         
         var me = this,
-            source = me.getCmp().up(me.getSource()),
-            selection = source.getSelection(),
+            button = me.getCmp(),
+            source = button.up(me.getSource()),
             params = me.getInputParams(),
             token = source.getViewModel().get('token');
         
-        if( Ext.isEmpty(selection)) {
+        if( Ext.isEmpty(params)) {
             return;
         }
         
@@ -57,11 +57,19 @@ Ext.define('Melisa.ux.confirmation.Button', {
     getInputParams: function() {
         
         var me = this,
-            source = me.getCmp().up(me.getSource()),
-            selection = source.getSelection();
+            button = me.getCmp(),
+            source = button.up(me.getSource()),
+            selection = source.getSelection(),
+            buttonVm = button.getViewModel();
         
-        if( Ext.isEmpty(selection)) {
-            return false;
+        if( Ext.isEmpty(selection)) {            
+            if( !buttonVm) {
+                return false;
+            } else {
+                return {
+                    id: buttonVm.get('record').get('id')
+                };
+            }
         }
         
         return {

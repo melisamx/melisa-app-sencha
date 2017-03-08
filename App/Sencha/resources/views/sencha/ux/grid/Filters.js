@@ -49,7 +49,8 @@ Ext.define('Melisa.ux.grid.Filters', {
                 filters[column.dataIndex] = {};                
             }
             
-            if( filtersIgnore.indexOf(column.dataIndex) !== -1) {                
+            if( filtersIgnore.indexOf(column.dataIndex) !== -1 
+                || column.xtype === 'widgetcolumn') {                
                 continue;
             }
             
