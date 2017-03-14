@@ -2,7 +2,8 @@ Ext.define('Melisa.core.Module', {
     
     requires: [
         'Melisa.core.Base',
-        'Melisa.core.module.Manager'
+        'Melisa.core.module.Manager',
+        'Melisa.core.module.Assets'
     ],
     
     mixins: [
@@ -51,13 +52,13 @@ Ext.define('Melisa.core.Module', {
             
         }
         
-        if( Ext.platformTags.modern) {
-            
+        if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked({
                 xtype: 'loadmask',
                 message: 'Configurando módulo...'
-            });
-            
+            });            
+        } else {
+            Ext.Msg.wait('Configurando módulo');
         }
         
         Ext.Ajax.request({
@@ -77,6 +78,8 @@ Ext.define('Melisa.core.Module', {
         
         if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked(false);            
+        } else {
+            Ext.Msg.close();
         }
         
         if( !config.success) {
@@ -90,10 +93,16 @@ Ext.define('Melisa.core.Module', {
         }
         
         if( Ext.isArray(config.assets)) {
-            
-            me.loadAsset(config.assets);
-            
+            me.loadAsset(config);
+        } else {
+            me.setModuleReady(config);
         }
+        
+    },
+    
+    setModuleReady: function(config) {
+        
+        var me = this;
         
         me.getViewModel().setData(config.data);
         me.setIsReady(true);
@@ -102,15 +111,31 @@ Ext.define('Melisa.core.Module', {
         
     },
     
-    loadAsset: function(assets) {
+    loadAsset: function(config) {
+        var me = this;
         
-        Ext.each(assets, function(asset) {
-            
-            if(asset.idAssetType === 2) Ext.util.CSS.swapStyleSheet(asset.id, asset.url);
-            else Ext.Loader.loadScript(asset.url);
-            
-        });
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Cargando archivos'
+            });            
+        } else {
+            Ext.Msg.wait('Cargando archivos');
+        }
         
+        Melisa.core.module.Assets.load(config.assets, Ext.bind(me.onLoadAssets, me, [config], 0));
+        
+    },
+    
+    onLoadAssets: function(config) {
+        
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked(false);            
+        } else {
+            Ext.Msg.close();
+        }
+        
+        this.setModuleReady(config);        
     },
     
     onFailureGetConfigModule: function() {
