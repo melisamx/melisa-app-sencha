@@ -25,7 +25,7 @@ Ext.define('Melisa.core.module.Assets', {
         }
         
         if( Ext.isEmpty(items)) {
-            return;
+            return me.callCallback();
         }
         
         me.createQueue().addAll(items);
