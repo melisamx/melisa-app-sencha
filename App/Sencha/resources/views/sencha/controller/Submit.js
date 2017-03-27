@@ -61,7 +61,9 @@ Ext.define('Melisa.controller.Submit', {
             event = {
                 autoClose: true
             };
-        console.log('onSuccessSubmit');    
+        
+        me.log('onSuccessSubmit', arguments);
+        
         if(typeof view.getAutoClose === 'function') {
             autoClose = view.getAutoClose();
         }
@@ -69,7 +71,8 @@ Ext.define('Melisa.controller.Submit', {
         form.reset();
         view.fireEvent('successsubmit', event, response, action);
         
-        if( event.autoClose) {
+        /* in modern platform cause error navigation */
+        if( event.autoClose && Ext.platformTags.classic) {
             view.close();
         }
         
