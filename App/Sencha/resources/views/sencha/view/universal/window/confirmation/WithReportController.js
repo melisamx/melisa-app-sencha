@@ -30,7 +30,7 @@ Ext.define('Melisa.view.universal.window.confirmation.WithReportController', {
     save: function(extraParams, params) {
         
         var me = this,
-            form = me.getForm(),
+            form = me.getViewForm(),
             vm = me.getViewModel();
         
         me.submitForm(form, vm, extraParams, params);
@@ -41,7 +41,7 @@ Ext.define('Melisa.view.universal.window.confirmation.WithReportController', {
         
         var me = this,
             view = me.getView(),
-            form = me.getForm(),
+            form = me.getViewForm(),
             event = {
                 autoClose: true
             };
