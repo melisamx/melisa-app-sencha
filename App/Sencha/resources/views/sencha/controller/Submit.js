@@ -5,8 +5,13 @@ Ext.define('Melisa.controller.Submit', {
         var me = this,
             view = me.getView(),
             form = typeof view.getForm === 'function' ? view.getForm() : null;
-    
+        
         if( form) {
+            return view;
+        }
+        
+        /* modern platform */
+        if( Ext.platformTags.modern && typeof view.getUrl !== 'undefined') {
             return view;
         }
         
