@@ -1,5 +1,5 @@
 Ext.define('Melisa.util.Format', {
-    override: 'Ext.util.Format',
+    override: 'Ext.util.Format'
 });
 
 /* no funciona o_T */

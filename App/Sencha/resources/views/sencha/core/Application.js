@@ -20,7 +20,8 @@ Ext.define('Melisa.core.Application', {
         'Melisa.core.AutoOpenModule',
         'Melisa.core.ProfileDesktop',
         'Melisa.core.ProfilePhone',
-        'Melisa.core.ViewController'
+        'Melisa.core.ViewController',
+        'Melisa.util.Format'
     ] : [
         'Melisa.override.Button',
         'Melisa.override.form.Panel',

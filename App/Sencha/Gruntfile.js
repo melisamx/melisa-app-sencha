@@ -57,6 +57,7 @@ module.exports = function(grunt) {
                         '<%= pkg.sencha %>view/desktop/ComboSex.js',
                     ],
                     '<%= pkg.output %>js/melisa-sencha-modern.min.js': [
+                        '<%= pkg.sencha %>util/Format.js',
                         '<%= pkg.sencha %>override/field/TextArea.js',
                         '<%= pkg.sencha %>override/Button.js',
                         '<%= pkg.sencha %>override/form/Panel.js',
