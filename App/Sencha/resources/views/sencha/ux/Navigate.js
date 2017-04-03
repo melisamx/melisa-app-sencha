@@ -3,9 +3,11 @@ Ext.define('Melisa.ux.Navigate', {
     navigateTo: function(component) {
         
         var me = this,
-            view = me.getView();
+            view = me.getView(),
+            cmp = me.lookup(component);
         
-        view.setActiveItem(me.lookupReference(component));
+        view.setActiveItem(cmp);
+        return cmp;
         
     }
     
