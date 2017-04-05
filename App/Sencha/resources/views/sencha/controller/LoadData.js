@@ -1,5 +1,21 @@
 Ext.define('Melisa.controller.LoadData', {
     
+    config: {
+        loadedData: false
+    },
+    
+    onBeforeLoadData: function(event) {
+        
+        var me = this;
+        
+        if( me.getLoadedData()) {
+            return false;
+        }
+        
+        me.setLoadedData(true);
+        
+    },
+    
     onLoadData: function(data, launcher) {
         
         var me = this,

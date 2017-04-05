@@ -65,7 +65,7 @@ Ext.define('Melisa.view.phone.ButtonField', {
         if( !config.button) {
             config.button = {
                 text: config.text || '' ,
-                description: config.description || ''
+                description: config.description || '&nbsp;'
             };
         }
         

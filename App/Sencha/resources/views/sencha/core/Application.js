@@ -10,7 +10,8 @@ Ext.define('Melisa.core.Application', {
     
     requires: Ext.platformTags.modern ? [
         'Melisa.override.field.TextArea',
-        'Melisa.override.form.field.Text',
+        'Melisa.override.field.Text',
+        'Melisa.override.field.Field',
         'Melisa.override.form.Panel',
         'Melisa.override.Button',
         'Melisa.override.plugin.PullRefresh',
