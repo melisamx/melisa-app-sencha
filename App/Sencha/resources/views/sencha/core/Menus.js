@@ -31,7 +31,7 @@ Ext.define('Melisa.core.Menus', {
             menuStruct = [],
             sourceChildren = me.getSourceChildren(),
             propertyChildren = me.getPropertyChildren();
-    
+        
         if( !Array.isArray(options)) {
             
             options = [ options ];
@@ -53,12 +53,23 @@ Ext.define('Melisa.core.Menus', {
                     
                 }
                 
+                if( Ext.isEmpty(option[propertyChildren])) {
+                    me.log('Menu without privileged options', option);
+                    return true;
+                }
+                
                 menuStruct.push(option);
                 return true;
                 
             }
             
             me.createStructOption(option, configMenu);
+            
+            if( typeof option.module!== 'undefined' && !option.module.allowed) {
+                me.log('ignore option is not allowed', option);
+                return true;
+            }
+            
             menuStruct.push(option);
             
         });

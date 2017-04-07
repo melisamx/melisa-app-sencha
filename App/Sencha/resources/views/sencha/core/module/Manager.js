@@ -91,6 +91,8 @@ Ext.define('Melisa.core.module.Manager', {
                 message: 'Abriendo módulo'
             });
             
+        } else {
+            Ext.Msg.wait('Abriendo módulo');            
         }
         
         if( !Ext.ClassManager.get(moduleConfig.nameSpace)) {

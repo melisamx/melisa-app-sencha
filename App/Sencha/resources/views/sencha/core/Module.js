@@ -2,7 +2,8 @@ Ext.define('Melisa.core.Module', {
     
     requires: [
         'Melisa.core.Base',
-        'Melisa.core.module.Manager'
+        'Melisa.core.module.Manager',
+        'Melisa.core.module.Assets'
     ],
     
     mixins: [
@@ -10,10 +11,11 @@ Ext.define('Melisa.core.Module', {
     ],
     
     config: {
+        configModule: {},
         initialized: false,
         isReady: false,
-        configModule: {},
-        lastModule: null
+        lastModule: null,
+        isAutoShow: true
     },
     
     initModule: function() {
@@ -50,13 +52,13 @@ Ext.define('Melisa.core.Module', {
             
         }
         
-        if( Ext.platformTags.modern) {
-            
+        if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked({
                 xtype: 'loadmask',
                 message: 'Configurando módulo...'
-            });
-            
+            });            
+        } else {
+            Ext.Msg.wait('Configurando módulo');
         }
         
         Ext.Ajax.request({
@@ -73,25 +75,34 @@ Ext.define('Melisa.core.Module', {
         
         var me = this,
             config = Ext.decode(request.responseText, true);
-    
-        if( Ext.platformTags.modern) {
-            
-            Ext.Viewport.setMasked(false);
-            
+        
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked(false);            
+        } else {
+            Ext.Msg.close();
         }
         
-        if( !config || typeof config.data === 'undefined') {
-            
-            me.fireEvent('errorgetconfig', request);
+        if( !config.success) {
+            console.log('error get module', config);
             return;
-            
+        }
+        
+        if( !config || typeof config.data === 'undefined') {            
+            me.fireEvent('errorgetconfig', request);
+            return;            
         }
         
         if( Ext.isArray(config.assets)) {
-            
-            me.loadAsset(config.assets);
-            
+            me.loadAsset(config);
+        } else {
+            me.setModuleReady(config);
         }
+        
+    },
+    
+    setModuleReady: function(config) {
+        
+        var me = this;
         
         me.getViewModel().setData(config.data);
         me.setIsReady(true);
@@ -100,15 +111,31 @@ Ext.define('Melisa.core.Module', {
         
     },
     
-    loadAsset: function(assets) {
+    loadAsset: function(config) {
+        var me = this;
         
-        Ext.each(assets, function(asset) {
-            
-            if(asset.idAssetType === 2) Ext.util.CSS.swapStyleSheet(asset.id, asset.url);
-            else Ext.Loader.loadScript(asset.url);
-            
-        });
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked({
+                xtype: 'loadmask',
+                message: 'Cargando archivos'
+            });            
+        } else {
+            Ext.Msg.wait('Cargando archivos');
+        }
         
+        Melisa.core.module.Assets.load(config.assets, Ext.bind(me.onLoadAssets, me, [config], 0));
+        
+    },
+    
+    onLoadAssets: function(config) {
+        
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked(false);            
+        } else {
+            Ext.Msg.close();
+        }
+        
+        this.setModuleReady(config);        
     },
     
     onFailureGetConfigModule: function() {
@@ -177,7 +204,7 @@ Ext.define('Melisa.core.Module', {
         
         console.log('reboot', arguments);
         
-        if( Ext.platformTags.classic) {
+        if( Ext.platformTags.classic && me.getIsAutoShow()) {
             
             /* necesary or never show */
             me.getEl().removeCls('x-hidden-offsets');

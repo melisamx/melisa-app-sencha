@@ -3,8 +3,7 @@
 use Melisa\Laravel\Database\InstallSeeder;
 
 class ApplicationSeeder extends InstallSeeder
-{    
-    use InstallApplication;
+{
     
     public function run()
     {
@@ -14,7 +13,7 @@ class ApplicationSeeder extends InstallSeeder
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.0.2',
+            'version'=>'1.4.0',
         ]);
         
     }

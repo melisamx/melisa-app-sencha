@@ -1,0 +1,15 @@
+{
+    "name": "melisa-app-sencha",
+    "version": "1.0.0",
+    "autor": {
+        "name": "Luis Josafat Heredia Contreras",
+        "email": "luisyosafat@gmail.com"
+    },
+    "description": "CLI para automatizar tareas",
+    "dependencies": {
+        "grunt": "1.0.0",
+        "grunt-contrib-less": "^1.3.0",
+        "grunt-contrib-watch": "1.0.0",
+        "grunt-contrib-uglify": "^2.0.0"
+    }
+}
