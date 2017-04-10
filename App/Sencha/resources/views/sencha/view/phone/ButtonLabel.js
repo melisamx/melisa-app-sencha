@@ -13,6 +13,10 @@ Ext.define('Melisa.view.phone.ButtonLabel', {
         
         var textElement = this.textElement,
             text = this.getText();
+    
+        if( typeof description === 'undefined') {
+            description = '';
+        }
         
         if (textElement) {
             if (text) {

@@ -9,6 +9,14 @@ Ext.define('Melisa.ux.Navigate', {
         view.setActiveItem(cmp);
         return cmp;
         
+    },
+    
+    navigateToItem: function(component) {
+        
+        var me = this;
+        
+        me.navigateTo(component.navigateToItem);
+        
     }
     
 });

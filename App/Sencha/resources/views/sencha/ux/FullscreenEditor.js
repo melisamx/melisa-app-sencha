@@ -61,7 +61,9 @@ Ext.define('Melisa.ux.FullscreenEditor', {
         cmp.setFlex(me.getOriginalFlex());
         cmp.setLabelWidth(me.getOriginalLabelWidth());
         
-        originalParent.insert(me.getOriginalPosition() + 1, cmp);
+        Ext.defer(function() {
+            originalParent.insert(me.getOriginalPosition() + 1, cmp);
+        }, 1);        
         
     },
     

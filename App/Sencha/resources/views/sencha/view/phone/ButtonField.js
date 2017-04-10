@@ -13,7 +13,8 @@ Ext.define('Melisa.view.phone.ButtonField', {
         title: null,
         activate: null,
         wrapper: '#wrapper',
-        buttonReturn: '#btnReturn'
+        buttonReturn: '#btnReturn',
+        description: null
     },
     
     constructor: function(config) {
@@ -29,12 +30,18 @@ Ext.define('Melisa.view.phone.ButtonField', {
     
     setValue: function(value, description) {
         
-        this.down('textfield').setValue(value);
+        this.down('textfield').setValue(value);        
+        this.setDescription(description);
         
-        if( description) {
-            this.setDescription(description);
-        }
-        
+    },
+    
+    reset: function() {
+        this.down('textfield').reset();
+        this.setDescription();
+    },
+    
+    getValueRaw: function() {
+        return this.down('buttonlabel').getDescription();
     },
     
     setDescription: function(value) {
