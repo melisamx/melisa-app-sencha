@@ -22,16 +22,12 @@ Ext.define('Melisa.view.universal.menu.TreeOptionsController', {
         
         var me = this;
         
-        if( !node) {
-            
-            return;
-            
+        if( !node) {            
+            return;            
         }
         
-        if( !node.data.module) {
-            
-            return;
-            
+        if( !node.data.module) {            
+            return;            
         }
         
         me.alternativeNameSpace(node.data.module);
@@ -54,7 +50,7 @@ Ext.define('Melisa.view.universal.menu.TreeOptionsController', {
                 
             } else {
                 
-                module.on('ready', me.onReadyModule, me, {
+                module.on('ready', me.onRebootModule, me, {
                     single: true
                 });
                 
@@ -66,19 +62,9 @@ Ext.define('Melisa.view.universal.menu.TreeOptionsController', {
     
     onRebootModule: function(module) {
         
-        var main = Ext.first('apppanelmain');
-        
         Ext.first('apppanelmenumodal').hide();
-        main.setActiveItem(module);
-        
-    },
-    
-    onReadyModule: function(module) {
-        
-        var main = Ext.first('apppanelmain');
-        
-        Ext.first('apppanelmenumodal').hide();
-        main.setActiveItem(module);
+//        this.activateMainModule();
+//        Ext.GlobalEvents.fireEvent('activatemodule', {}, module);
         
     }
     

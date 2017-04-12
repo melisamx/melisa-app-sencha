@@ -42,20 +42,21 @@ Ext.define('Melisa.core.ViewController', {
         
     },
     
-    activateMainModule: function() {
+    activateMainModule: function(component) {
         
         var me = this,
             view = me.getView(),
             lastModule = view.getLastModule();
-        
-        me.activateModule(lastModule);
+    
+        me.log('activateMainModule', component, lastModule);
         
         if( !lastModule) {
-            
-            return;
-            
+            console.log('no last module');
+            return;            
         }
         
+        Ext.GlobalEvents.fireEvent('activatemodule', {}, lastModule);
+        return;
         view.setLastModule(null);
         /* necesary change url */
         lastModule.redirectToModule();
@@ -64,7 +65,7 @@ Ext.define('Melisa.core.ViewController', {
     
     activateModule: function(module) {
         
-        Ext.GlobalEvents.fireEvent('activatemodule', module);
+        Ext.GlobalEvents.fireEvent('activatemodule', {}, module);
         
     },
     
@@ -79,6 +80,9 @@ Ext.define('Melisa.core.ViewController', {
             launcher;
         
         if( classHandlers.indexOf(className) !== -1) {
+            launcher = config;
+            config = config.getMelisa();
+        } else if( typeof config.getMelisa !== 'undefined') {
             launcher = config;
             config = config.getMelisa();
         }
@@ -137,6 +141,13 @@ Ext.define('Melisa.core.ViewController', {
             classHandlers = me.getHandlersClass(),
             className = Ext.getClassName(options.launcher);
     
+        me.log('fire module loaded', {
+            options: options, 
+            module: module, 
+            classHandlers: classHandlers, 
+            className: className
+        });
+    
         module.setLastModule(me.getView());
         
         if( Ext.isFunction(options.callbackOnReady)) {
@@ -144,6 +155,8 @@ Ext.define('Melisa.core.ViewController', {
         }
         
         if( classHandlers.indexOf(className) !== -1) {
+            options.launcher.fireEvent('loaded', module, options);
+        } else if(typeof options.launcher.getMelisa !== 'undefined') {
             options.launcher.fireEvent('loaded', module, options);
         }
         
@@ -155,15 +168,15 @@ Ext.define('Melisa.core.ViewController', {
         
         me.log('onActivateModule', arguments);
         
-        if( !me.fireEvent('beforeactivatemodule', module)) {
-            console.log('cancel activate module');
+        if( !me.fireEvent('beforeactivatemodule', options, module)) {
+            me.log('cancel activate module', options, module);
             return;
         }
         
         if( module.getIsAutoShow()) {
-            Ext.GlobalEvents.fireEvent('activatemodule', module);
+            Ext.GlobalEvents.fireEvent('activatemodule', options, module);
         } else {
-            console.log('no auto show module', module);
+            me.log('no auto show module', options, module);
         }
         
     }

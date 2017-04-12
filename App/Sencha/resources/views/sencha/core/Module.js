@@ -25,11 +25,9 @@ Ext.define('Melisa.core.Module', {
     
         me.log('init module', config);
         
-        if(me.getInitialized()) {
-            
+        if(me.getInitialized()) {            
             console.log('module initialized');
-            return;
-            
+            return;            
         }
         
         me.setInitialized(true);
@@ -75,6 +73,8 @@ Ext.define('Melisa.core.Module', {
         
         var me = this,
             config = Ext.decode(request.responseText, true);
+    
+        me.log('success get config module', config);
         
         if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked(false);            
@@ -104,6 +104,7 @@ Ext.define('Melisa.core.Module', {
         
         var me = this;
         
+        me.log('set module ready', config);
         me.getViewModel().setData(config.data);
         me.setIsReady(true);
         me.on('reboot', me.onReboot, me);
@@ -113,6 +114,8 @@ Ext.define('Melisa.core.Module', {
     
     loadAsset: function(config) {
         var me = this;
+        
+        me.log('load assets', config);
         
         if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked({
@@ -129,13 +132,18 @@ Ext.define('Melisa.core.Module', {
     
     onLoadAssets: function(config) {
         
+        var me = this;
+        
+        me.log('assets loading', config);
+        
         if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked(false);            
         } else {
             Ext.Msg.close();
         }
         
-        this.setModuleReady(config);        
+        me.setModuleReady(config);
+        
     },
     
     onFailureGetConfigModule: function() {
@@ -151,7 +159,10 @@ Ext.define('Melisa.core.Module', {
     
     onReady: function() {
         
-        this.redirectToModule();
+        var me = this;
+        
+        me.log('on ready');
+        me.redirectToModule();
         
     },
     
@@ -163,19 +174,22 @@ Ext.define('Melisa.core.Module', {
             controller = me.getController(),
             isCurrent,
             token = Ext.ClassManager.getName(me);
-    
-        if( route) {
             
-            me.redirectTo(route);
+        me.log('redirect module', {
+            me: me,
+            route: route,
+            controller: controller,
+            token: token
+        });
+        
+        if( route && controller) {
+            controller.redirectTo(route);
             return;
-            
         }
         
-        if( controller) {
-            
+        if( controller) {            
             controller.redirectTo(token);
-            return;
-            
+            return;            
         }
         
         /* 
@@ -202,7 +216,7 @@ Ext.define('Melisa.core.Module', {
         
         var me = this;
         
-        console.log('reboot', arguments);
+        me.log('reboot', arguments);
         
         if( Ext.platformTags.classic && me.getIsAutoShow()) {
             

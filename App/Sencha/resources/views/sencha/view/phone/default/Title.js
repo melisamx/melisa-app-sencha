@@ -32,7 +32,7 @@ Ext.define('Melisa.view.phone.default.Title', {
             };
         }
         
-        this.add(Ext.applyIf(config.buttonReturn, {
+        this.insert(0, Ext.applyIf(config.buttonReturn, {
             iconCls: 'x-fa fa fa-chevron-left',
             itemId: 'btnReturn'
         }));
