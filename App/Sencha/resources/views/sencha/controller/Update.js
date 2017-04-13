@@ -5,9 +5,16 @@ Ext.define('Melisa.controller.Update', {
         var me = this,
             form = me.getViewForm();
         
+        me.log('on success load data in controller update');
         me.appendFieldsHidden();
         
-        form.getForm().setValues(data);
+        if( Ext.platformTags.modern) {
+            form.setValues(data);
+        } else {
+            form.getForm().setValues(data);
+        }
+        
+        me.activateModule(me.getView());
         
     }
     

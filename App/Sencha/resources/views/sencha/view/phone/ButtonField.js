@@ -4,27 +4,32 @@ Ext.define('Melisa.view.phone.ButtonField', {
     
     requires: [
         'Melisa.view.phone.ButtonLabel'
-    ],
+    ],    
     
-    layout: 'fit',
-    cls: 'buttonfield',
     config: {
         list: null,
         title: null,
         activate: null,
-        wrapper: '#wrapper',
+        wrapper: '[isModule=true]',
         buttonReturn: '#btnReturn',
-        description: null
+        description: null,
+        text: null,
+        name: 'name'
     },
     
-    constructor: function(config) {
+    layout: 'fit',
+    cls: 'buttonfield',
+    
+    /* fix bug reference wrapper, best practice use initialize */
+    initialize: function() {
         
         var me = this;
         
         me.callParent(arguments);
+        me.setWrapper(me.up('[isModule=true]'));
         
-        me.addButton(config);
-        me.addHiddenField(config);
+        me.addButton(me.getConfig());
+        me.addHiddenField(me.getConfig());
         
     },
     
@@ -46,7 +51,7 @@ Ext.define('Melisa.view.phone.ButtonField', {
     
     setDescription: function(value) {
         
-        this.down('buttonlabel').setDescription(value);
+        this.down('buttonlabel').setDescription(value  || '&nbsp;');
         
     },
     

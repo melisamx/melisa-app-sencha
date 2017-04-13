@@ -69,7 +69,7 @@ Ext.define('Melisa.view.desktop.dashboard.tabs.WrapperController', {
         
     },
     
-    onActivateModule: function(options, module) {
+    onGlobalActivateModule: function(options, module) {
         
         var me = this,
             main = Ext.first('apppanelcenter'),

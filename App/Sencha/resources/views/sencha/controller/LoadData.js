@@ -26,13 +26,19 @@ Ext.define('Melisa.controller.LoadData', {
                 launcher: launcher
             };
             
+        me.log('on load data', arguments);
+            
         if( view.fireEvent('beforeloaddata', data, event) === false || event.cancel) {
             me.log('cancel flow load data', event);
             return;
         }
         
         me.getViewModel().set(data);
-        view.show(launcher || null);        
+        
+        if( Ext.platformTags.classic) {
+            view.show(launcher || null);
+        }
+        
         me.loadRemoteData(data);
         
     },
@@ -92,16 +98,12 @@ Ext.define('Melisa.controller.LoadData', {
         
     },
     
-    showLoadingMessage: function() {
-        
-        console.log('message');
-        
+    showLoadingMessage: function() {        
+        console.log('message');        
     },
     
-    closeWindow: function() {
-        
-        console.log('closeWindow');
-        
+    closeWindow: function() {        
+        console.log('closeWindow');        
     }
     
 });

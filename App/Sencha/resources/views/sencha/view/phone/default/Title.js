@@ -14,7 +14,7 @@ Ext.define('Melisa.view.phone.default.Title', {
         'hidden'
     ],
     
-    constructor: function(config) {
+    initialize: function(config) {
         
         var me = this;
         

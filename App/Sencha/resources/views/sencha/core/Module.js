@@ -15,7 +15,9 @@ Ext.define('Melisa.core.Module', {
         initialized: false,
         isReady: false,
         lastModule: null,
-        isAutoShow: true
+        isAutoShow: true,
+        isModule: true,
+        closeDestroy: false
     },
     
     initModule: function() {
@@ -51,10 +53,10 @@ Ext.define('Melisa.core.Module', {
         }
         
         if( Ext.platformTags.modern) {            
-            Ext.Viewport.setMasked({
-                xtype: 'loadmask',
-                message: 'Configurando módulo...'
-            });            
+//            Ext.Viewport.setMasked({
+//                xtype: 'loadmask',
+//                message: 'Configurando módulo...'
+//            });            
         } else {
             Ext.Msg.wait('Configurando módulo');
         }
@@ -77,7 +79,7 @@ Ext.define('Melisa.core.Module', {
         me.log('success get config module', config);
         
         if( Ext.platformTags.modern) {            
-            Ext.Viewport.setMasked(false);            
+//            Ext.Viewport.setMasked(false);            
         } else {
             Ext.Msg.close();
         }
@@ -149,10 +151,8 @@ Ext.define('Melisa.core.Module', {
     onFailureGetConfigModule: function() {
         
         console.log('onFailureGetConfigModule', arguments);
-        if( Ext.platformTags.modern) {
-            
-            Ext.Viewport.setMasked(false);
-            
+        if( Ext.platformTags.modern) {            
+            Ext.Viewport.setMasked(false);            
         }
         
     },
@@ -200,14 +200,10 @@ Ext.define('Melisa.core.Module', {
         
         isCurrent = Ext.util.History.getToken() === token;
         
-        if( !isCurrent) {
-            
-            Ext.util.History.add(token);
-            
-        } else {
-            
-            Ext.app.route.Router.onStateChange(token);
-            
+        if( !isCurrent) {            
+            Ext.util.History.add(token);            
+        } else {            
+            Ext.app.route.Router.onStateChange(token);            
         }
         
     },

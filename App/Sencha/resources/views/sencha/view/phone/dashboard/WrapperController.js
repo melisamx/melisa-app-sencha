@@ -3,16 +3,18 @@ Ext.define('Melisa.view.phone.dashboard.WrapperController', {
     
     requires: [
         'Melisa.view.universal.dashboard.WrapperController',
-        'Melisa.view.phone.menu.Modal'
+        'Melisa.view.phone.menu.Modal',
+        'Melisa.core.module.Manager'
     ],
     
     routes: {
         home: 'onRouteShowHome'
     },
     
-    onActivateModule: function(options, module) {
+    onGlobalActivateModule: function(options, module) {
         
-        var me = this;
+        var me = this,
+            activeModule = Ext.Viewport.getActiveItem();
         
         me.log('on activate module', module);
         
@@ -22,6 +24,17 @@ Ext.define('Melisa.view.phone.dashboard.WrapperController', {
         }
         
         Ext.Viewport.setActiveItem(module);
+        
+        if( typeof activeModule.getCloseDestroy !== 'undefined' && activeModule.getCloseDestroy()) {
+            
+            /* better performance */
+            try {
+                Melisa.core.module.Manager.unRegister(Ext.getClassName(activeModule));
+            } catch (e) {
+
+            }
+            
+        }       
         
     },
     
@@ -45,7 +58,7 @@ Ext.define('Melisa.view.phone.dashboard.WrapperController', {
     onChangeHistory: function(route) {
         
         var me = this;
-        
+        console.log('onChangeHistory');
         if( route) {            
             return;            
         }
@@ -63,14 +76,14 @@ Ext.define('Melisa.view.phone.dashboard.WrapperController', {
     onRouteShowHome: function() {
         
         var me = this;
-        
+        console.log('onRouteShowHome');
         Ext.Viewport.setActiveItem(me.getView());
         me.navigateCard('apppanelbody');
         
     },
     
     navigateCard: function(component) {
-        
+        console.log('navigateCard');
         var me = this,
             view = me.getView(),
             cmp = me.lookupReference(component);

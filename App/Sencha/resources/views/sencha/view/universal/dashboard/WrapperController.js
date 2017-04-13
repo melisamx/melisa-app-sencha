@@ -11,7 +11,7 @@ Ext.define('Melisa.view.universal.dashboard.WrapperController', {
     
     listen: {
         global: {
-            activatemodule: 'onActivateModule'
+            activatemodule: 'onGlobalActivateModule'
         }
     },
     

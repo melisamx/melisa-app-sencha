@@ -46,13 +46,22 @@ Ext.define('Melisa.core.ViewController', {
         
         var me = this,
             view = me.getView(),
-            lastModule = view.getLastModule();
+            lastModule = view.getLastModule(),
+            event = {
+                cancel: false,
+                lastModule: lastModule
+            };
     
         me.log('activateMainModule', component, lastModule);
         
         if( !lastModule) {
             console.log('no last module');
             return;            
+        }
+        
+        if( view.fireEvent('beforeactivatelastmodule', event) === false || event.cancel) {
+            me.log('cancel activate module');
+            return;
         }
         
         Ext.GlobalEvents.fireEvent('activatemodule', {}, lastModule);
@@ -120,7 +129,7 @@ Ext.define('Melisa.core.ViewController', {
     onLaunchModuleReboot: function(options, module) {
         
         var me = this;
-        
+        console.log('onLaunchModuleReboot', module);
         me.fireModuleLoaded(options, module);
         me.onActivateModule(options, module);
         
@@ -129,7 +138,7 @@ Ext.define('Melisa.core.ViewController', {
     onLaunchModuleReady: function(options, module) {
         
         var me = this;
-        
+        console.log('onLaunchModuleReady', module);
         me.fireModuleLoaded(options, module);
         me.onActivateModule(options, module);
         
@@ -145,7 +154,8 @@ Ext.define('Melisa.core.ViewController', {
             options: options, 
             module: module, 
             classHandlers: classHandlers, 
-            className: className
+            className: className,
+            view: me.getView()
         });
     
         module.setLastModule(me.getView());

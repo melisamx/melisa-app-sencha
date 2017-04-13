@@ -5,7 +5,12 @@ Ext.define('Melisa.controller.AppendFields', {
         var me = this,
             form = me.getViewForm(),
             vm = me.getViewModel(),
-            fieldsHidden = vm.get('fieldsHidden');
+            view = me.getView(),
+            fieldsHidden = vm.get('fieldsHidden'),
+            /* fix error ui no show */
+            appendFieldsTo = typeof view.getAppendFieldsTo !== 'undefined' ? 
+                view.getAppendFieldsTo() : null;
+    
         
         /* no especific id fields, use standard id field */
         if( !fieldsHidden) {
@@ -16,8 +21,14 @@ Ext.define('Melisa.controller.AppendFields', {
             fieldsHidden = [fieldsHidden];
         }
         
+        if( appendFieldsTo) {
+            form = view.down('#' + appendFieldsTo);
+        }
+        
+        me.log('append id fields hidden', fieldsHidden, form);
+        
         Ext.each(fieldsHidden, function(name) {
-           
+            
             form.add({
                 xtype: 'textfield',
                 hidden: true,
