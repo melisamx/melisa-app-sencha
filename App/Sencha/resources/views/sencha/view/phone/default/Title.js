@@ -6,6 +6,11 @@ Ext.define('Melisa.view.phone.default.Title', {
         'Melisa.ux.field.Search'
     ],    
     
+    config: {
+        text: null,
+        buttonReturn: null
+    },
+    
     hideAnimation: 'fadeOut',
     docked: 'top',
     layout: 'hbox',
@@ -14,13 +19,13 @@ Ext.define('Melisa.view.phone.default.Title', {
         'hidden'
     ],
     
-    initialize: function(config) {
+    initialize: function() {
         
         var me = this;
         
         me.callParent(arguments);
         
-        me.addBtnReturn(config);
+        me.addBtnReturn(me.getConfig());
         
     },
     

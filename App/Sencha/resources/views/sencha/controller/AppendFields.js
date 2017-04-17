@@ -1,5 +1,9 @@
 Ext.define('Melisa.controller.AppendFields', {
     
+    config: {
+        isAppendedFields: false
+    },
+    
     appendFieldsHidden: function() {
         
         var me = this,
@@ -11,6 +15,12 @@ Ext.define('Melisa.controller.AppendFields', {
             appendFieldsTo = typeof view.getAppendFieldsTo !== 'undefined' ? 
                 view.getAppendFieldsTo() : null;
     
+        if( me.getIsAppendedFields()) {
+            me.log('ignore append fields');
+            return;
+        } else {
+            me.setIsAppendedFields(true);
+        }
         
         /* no especific id fields, use standard id field */
         if( !fieldsHidden) {

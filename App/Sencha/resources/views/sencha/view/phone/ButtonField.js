@@ -14,7 +14,8 @@ Ext.define('Melisa.view.phone.ButtonField', {
         buttonReturn: '#btnReturn',
         description: null,
         text: null,
-        name: 'name'
+        name: 'name',
+        hiddenField: null
     },
     
     layout: 'fit',

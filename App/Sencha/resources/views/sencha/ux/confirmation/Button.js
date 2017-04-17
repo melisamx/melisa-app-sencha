@@ -31,9 +31,8 @@ Ext.define('Melisa.ux.confirmation.Button', {
         
         var me = this,
             button = me.getCmp(),
-            source = button.up(me.getSource()),
             params = me.getInputParams(),
-            token = source.getViewModel().get('token');
+            token = button.getViewModel().getParent().get('token');
         
         if( Ext.isEmpty(params)) {
             return;
