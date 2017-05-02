@@ -78,6 +78,15 @@ Ext.define('Melisa.core.ViewController', {
         
     },
     
+    closeModule: function(component) {
+        
+        var me = this;
+        
+        me.getView().setClosingModule(true);
+        me.activateMainModule(component);
+        
+    },
+    
     moduleRun: function(config, callbackOnReady, callbackOnReboot, params, scope) {
         
         var me = this,

@@ -25,7 +25,11 @@ Ext.define('Melisa.view.phone.dashboard.WrapperController', {
         
         Ext.Viewport.setActiveItem(module);
         
-        if( typeof activeModule.getCloseDestroy !== 'undefined' && activeModule.getCloseDestroy()) {
+        if( typeof activeModule.getCloseDestroy !== 'undefined' 
+                && activeModule.getCloseDestroy() && 
+                /* necesary or not activate extern module */
+                typeof activeModule.getClosingModule !== 'undefined' && 
+                activeModule.getClosingModule()) {
             
             /* better performance */
             try {

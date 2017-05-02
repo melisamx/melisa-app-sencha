@@ -17,7 +17,8 @@ Ext.define('Melisa.core.Module', {
         lastModule: null,
         isAutoShow: true,
         isModule: true,
-        closeDestroy: false
+        closeDestroy: false,
+        closingModule: false
     },
     
     initModule: function() {
