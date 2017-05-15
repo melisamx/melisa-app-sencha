@@ -58,6 +58,7 @@ module.exports = function(grunt) {
                     ],
                     '<%= pkg.output %>js/melisa-sencha-modern.min.js': [
                         '<%= pkg.sencha %>util/Format.js',
+                        '<%= pkg.sencha %>override/field/Number.js',
                         '<%= pkg.sencha %>override/field/Toggle.js',
                         '<%= pkg.sencha %>override/field/TextArea.js',
                         '<%= pkg.sencha %>override/field/Text.js',
