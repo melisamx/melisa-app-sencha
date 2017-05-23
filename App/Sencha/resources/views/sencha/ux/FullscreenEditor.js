@@ -17,7 +17,7 @@ Ext.define('Melisa.ux.FullscreenEditor', {
         
         var me = this;
         
-        cmp.on('focus', me.onFocus, me);
+//        cmp.on('focus', me.onFocus, me);
         
     },
     
@@ -32,7 +32,7 @@ Ext.define('Melisa.ux.FullscreenEditor', {
             hideOnMaskTap: true,
             centered: true,
             hidden: true,
-            width: Ext.filterPlatform('ie10') ? '100%' : (Ext.os.deviceType == 'Phone') ? '100%' : 400,
+            width: Ext.filterPlatform('ie10') ? '100%' : (Ext.os.deviceType == 'Phone') ? '90%' : 400,
             layout: {
                 type: 'hbox',
                 align: 'stretch'
@@ -73,7 +73,7 @@ Ext.define('Melisa.ux.FullscreenEditor', {
             editor = me.getEditor(),
             originalParent = me.getOriginalParent(),
             cmp = me.getCmp(),
-            nextField = originalParent.getAt(me.getOriginalPosition() + 1);
+            nextField = originalParent.getAt(me.getOriginalPosition());
         
         cmp.setFlex(me.getOriginalFlex());
         cmp.setLabelWidth(me.getOriginalLabelWidth());
@@ -124,8 +124,8 @@ Ext.define('Melisa.ux.FullscreenEditor', {
         me.setOriginalFlex(cmp.getFlex());
         me.setOriginalLabelWidth(cmp.getLabelWidth());
         
-        cmp.setFlex(1);
-        cmp.setLabelWidth('100%');
+//        cmp.setFlex(1);
+//        cmp.setLabelWidth('100%');
         
         editor = Ext.Viewport.add(me.getConfigEditor());
         editor.on('painted', me.onPaintedEditor, me);
