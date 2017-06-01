@@ -1,4 +1,6 @@
-<?php namespace App\Sencha;
+<?php
+
+namespace App\Sencha;
 
 use Melisa\Laravel\ApplicationBase;
 

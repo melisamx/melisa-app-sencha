@@ -1,4 +1,6 @@
-<?php namespace App\Sencha\Providers;
+<?php
+
+namespace App\Sencha\Providers;
 
 use Melisa\Laravel\Providers\RouteServiceProvider as RouteService;
 

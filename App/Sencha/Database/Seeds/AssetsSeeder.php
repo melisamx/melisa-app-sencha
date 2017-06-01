@@ -1,4 +1,6 @@
-<?php namespace App\Sencha\Database\Seeds;
+<?php
+
+namespace App\Sencha\Database\Seeds;
 
 use Melisa\Laravel\Database\InstallSeeder;
 

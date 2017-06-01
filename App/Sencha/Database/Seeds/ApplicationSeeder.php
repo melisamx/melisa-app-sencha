@@ -1,4 +1,6 @@
-<?php namespace App\Sencha\Database\Seeds;
+<?php
+
+namespace App\Sencha\Database\Seeds;
 
 use Melisa\Laravel\Database\InstallSeeder;
 
@@ -13,7 +15,7 @@ class ApplicationSeeder extends InstallSeeder
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.8.3',
+            'version'=>'1.8.4',
         ]);
         
     }
