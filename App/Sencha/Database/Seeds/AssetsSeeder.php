@@ -13,8 +13,7 @@ class AssetsSeeder extends InstallSeeder
 {
     
     public function run()
-    {
-        
+    {        
         $this->installAssetJs('app.sencha.classic', [
             'name'=>'Classic Toolkit',
             'path'=>'/sencha/js/melisa-sencha-classic.min.js',
@@ -23,8 +22,7 @@ class AssetsSeeder extends InstallSeeder
         $this->installAssetJs('app.sencha.modern', [
             'name'=>'Modern Toolkit',
             'path'=>'/sencha/js/melisa-sencha-modern.min.js',
-        ]);
-        
+        ]);        
     }
     
 }

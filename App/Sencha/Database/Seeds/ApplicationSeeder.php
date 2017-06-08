@@ -8,16 +8,14 @@ class ApplicationSeeder extends InstallSeeder
 {
     
     public function run()
-    {
-        
+    {        
         $this->installApplication('sencha', [
             'name'=>'Sencha',
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.9.1',
-        ]);
-        
+            'version'=>'1.10.0',
+        ]);        
     }
     
 }

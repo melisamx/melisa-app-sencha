@@ -21,8 +21,7 @@ Ext.define('Melisa.core.Module', {
         closingModule: false
     },
     
-    initModule: function() {
-        
+    initModule: function() {        
         var me = this,
             config = me.getConfigModule();
     
@@ -68,12 +67,10 @@ Ext.define('Melisa.core.Module', {
             success: me.onSuccessGetConfigModule,
             failure: me.onFailureGetConfigModule,
             scope: me
-        });
-        
+        });        
     },
     
     onSuccessGetConfigModule: function(request) {        
-        
         var me = this,
             config = Ext.decode(request.responseText, true);
     
@@ -99,20 +96,17 @@ Ext.define('Melisa.core.Module', {
             me.loadAsset(config);
         } else {
             me.setModuleReady(config);
-        }
-        
+        }        
     },
     
-    setModuleReady: function(config) {
-        
+    setModuleReady: function(config) {        
         var me = this;
         
         me.log('set module ready', config);
         me.getViewModel().setData(config.data);
         me.setIsReady(true);
         me.on('reboot', me.onReboot, me);
-        me.fireEvent('ready', me, config);
-        
+        me.fireEvent('ready', me, config);        
     },
     
     loadAsset: function(config) {
@@ -129,12 +123,10 @@ Ext.define('Melisa.core.Module', {
             Ext.Msg.wait('Cargando archivos');
         }
         
-        Melisa.core.module.Assets.load(config.assets, Ext.bind(me.onLoadAssets, me, [config], 0));
-        
+        Melisa.core.module.Assets.load(config.assets, Ext.bind(me.onLoadAssets, me, [config], 0));        
     },
     
-    onLoadAssets: function(config) {
-        
+    onLoadAssets: function(config) {        
         var me = this;
         
         me.log('assets loading', config);
@@ -145,30 +137,30 @@ Ext.define('Melisa.core.Module', {
             Ext.Msg.close();
         }
         
-        me.setModuleReady(config);
-        
+        me.setModuleReady(config);        
     },
     
-    onFailureGetConfigModule: function() {
+    onFailureGetConfigModule: function(request) {        
+        var me = this,
+            response = Ext.decode(request.responseText, true);
         
-        console.log('onFailureGetConfigModule', arguments);
         if( Ext.platformTags.modern) {            
             Ext.Viewport.setMasked(false);            
+        } else {
+            Ext.Msg.close();
         }
         
+        console.log(response);
     },
     
-    onReady: function() {
-        
+    onReady: function() {        
         var me = this;
         
         me.log('on ready');
-        me.redirectToModule();
-        
+        me.redirectToModule();        
     },
     
-    redirectToModule: function() {
-        
+    redirectToModule: function() {        
         var me = this,
             model = me.getViewModel(),
             route = model.get('route'),
@@ -205,12 +197,10 @@ Ext.define('Melisa.core.Module', {
             Ext.util.History.add(token);            
         } else {            
             Ext.app.route.Router.onStateChange(token);            
-        }
-        
+        }        
     },
     
-    onReboot: function() {
-        
+    onReboot: function() {        
         var me = this;
         
         me.log('reboot', arguments);
@@ -223,8 +213,7 @@ Ext.define('Melisa.core.Module', {
             
         }
         
-        me.redirectToModule();
-        
+        me.redirectToModule();        
     }
     
 });
