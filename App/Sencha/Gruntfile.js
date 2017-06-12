@@ -141,4 +141,10 @@ module.exports = function(grunt) {
         ]);
     });
     
+    grunt.registerTask('concatfiles', 'Concact files', function() {
+        grunt.task.run([
+            'uglify:concat'
+        ]);
+    });
+    
 };
