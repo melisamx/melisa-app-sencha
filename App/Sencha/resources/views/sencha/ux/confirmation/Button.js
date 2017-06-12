@@ -54,32 +54,17 @@ Ext.define('Melisa.ux.confirmation.Button', {
         
     },
     
-    getInputParams: function() {
-        
+    getInputParams: function() {        
         var me = this,
             button = me.getCmp(),
-            source = button.up(me.getSource()),
-            selection = source.getSelection(),
             buttonVm = button.getViewModel();
         
-        if( Ext.isEmpty(selection)) {            
-            if( !buttonVm) {
-                return false;
-            } else {
-                return {
-                    id: buttonVm.get('record').get('id')
-                };
-            }
-        }
-        
         return {
-            id: selection[0].get('id')
-        };
-        
+            id: buttonVm.get('record').get('id')
+        };        
     },
     
-    onCallBack: function(response) {
-        
+    onCallBack: function(response) {        
         var me = this,
             config = me.getCmp().getMelisa();
         
@@ -95,12 +80,10 @@ Ext.define('Melisa.ux.confirmation.Button', {
         me.setUrl(config.url);
         
         me.showMessageWait();        
-        me.createRequest();
-        
+        me.createRequest();        
     },
     
-    createRequest: function() {
-        
+    createRequest: function() {        
         var me = this;
         
         Ext.Ajax.request({
@@ -113,24 +96,29 @@ Ext.define('Melisa.ux.confirmation.Button', {
                 'X-CSRF-TOKEN': me.getToken()
             },
             scope: me
-        });
-        
+        });        
     },
     
-    onSuccessAction: function() {
-        
+    onSuccessAction: function() {        
         var me = this;
         
         me.closeMessageWait();
+        me.showMessageSuccess(me.getMessageSuccess());
         
         if( !me.getRefreshSourceSuccess()) {
             return;
         }
         
         me.getCmp().up(me.getSource()).getStore().reload();
+    },
+    
+    showMessageSuccess: function(message) {
+        if( !message) {
+            return;
+        }
         
         Ext.toast({
-            html: '<i class="x-fa fa-check"></i> ' + me.getMessageSuccess(),
+            html: '<i class="x-fa fa-check"></i> ' + message,
             align: 'tr',
             bodyPadding: '15px 10px',
             header: false
