@@ -15,7 +15,7 @@ Ext.define('Melisa.core.menus.Tree', {
     
     /*
      * necesary for singleton class
-     */
+ */
     constructor: function() {
         this.initConfig(arguments);
     },

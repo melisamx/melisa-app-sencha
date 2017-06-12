@@ -10,6 +10,7 @@ Ext.define('Melisa.ux.confirmation.Button', {
         messageConfirmation: '¿Realmente desea eliminar?',
         messageWait: 'Espere un momento...',
         messageError: 'Imposible realizar la acción, intentelo nuevamente',
+        messageSuccess: null,
         source: 'grid',
         params: [],
         token: null,
@@ -128,6 +129,12 @@ Ext.define('Melisa.ux.confirmation.Button', {
         
         me.getCmp().up(me.getSource()).getStore().reload();
         
+        Ext.toast({
+            html: '<i class="x-fa fa-check"></i> ' + me.getMessageSuccess(),
+            align: 'tr',
+            bodyPadding: '15px 10px',
+            header: false
+        });
     },
     
     onFailureAction: function() {

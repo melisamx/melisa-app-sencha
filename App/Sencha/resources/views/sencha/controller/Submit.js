@@ -58,7 +58,10 @@ Ext.define('Melisa.controller.Submit', {
         var me = this,
             view = me.getView(),
             form = me.getViewForm(),
+            vm = me.getViewModel(),
             event = {
+                autoShowMessageSuccess: true,
+                autoEventSuccess: true,
                 autoClose: true
             };
         
@@ -70,6 +73,19 @@ Ext.define('Melisa.controller.Submit', {
         
         form.reset();
         view.fireEvent('successsubmit', event, response, action);
+        
+        if( me.eventSuccess && event.autoEventSuccess) {
+            Ext.GlobalEvents.fireEvent(me.eventSuccess, action.result);
+        }
+        
+        if( event.autoShowMessageSuccess && vm.get('i18n.success')) {
+            Ext.toast({
+                header: false,
+                html: '<i class="x-fa fa-check"></i> ' + vm.get('i18n.success'),
+                align: 'tr',
+                bodyPadding: '15px 10px'
+            });
+        }
         
         /* in modern platform cause error navigation */
         if( event.autoClose && Ext.platformTags.classic) {

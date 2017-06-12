@@ -9,7 +9,7 @@ Ext.define('Melisa.ux.gmd.list.Cards', {
     
     /*
      * necesary for singleton class
-     */
+ */
     constructor: function() {
         this.initConfig(arguments);
     },

@@ -5,6 +5,7 @@ module.exports = function(grunt) {
             appName: 'Sencha',
             sencha: 'resources/views/sencha/',
             src: 'resources/assets/',
+            srcSencha: 'resources/views/sencha/',
             output: '../../public/<%= pkg.appName.toLowerCase() %>/',
             proyect: {
                 name: 'Melisa Sencha',
@@ -96,6 +97,19 @@ module.exports = function(grunt) {
                         '<%= pkg.sencha %>view/phone/gmd/ButtonAction.js',
                     ]
                 }
+            },
+            production: {
+                files: [
+                    {
+                        expand: true,
+                        cwd : '<%= pkg.srcSencha %>',
+                        src: [
+                            '**/*.js',
+                            '!**/*.min.js'
+                        ],
+                        dest: '<%= pkg.srcSencha %>'
+                    }
+                ]
             }
         },
         less: {
@@ -110,7 +124,7 @@ module.exports = function(grunt) {
         },
         watch: {
             files: ['<%= pkg.src %>less/**/*.less', '<%= pkg.sencha %>**'],
-            tasks: ['less', 'uglify']
+            tasks: ['less', 'uglify:concat']
         }
     });
     
@@ -120,5 +134,11 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'watch'
     ]);
+    
+    grunt.registerTask('production', 'Minify files', function() {
+        grunt.task.run([
+            'uglify:production'
+        ]);
+    });
     
 };

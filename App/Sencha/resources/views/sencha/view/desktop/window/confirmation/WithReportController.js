@@ -9,7 +9,7 @@ Ext.define('Melisa.view.desktop.window.confirmation.WithReportController', {
     /**
      * Set url form
      * override Melisa.controller.Create
-     */
+ */
     onReady: function() {
         
         var me = this;

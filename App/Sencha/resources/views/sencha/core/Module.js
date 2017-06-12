@@ -189,7 +189,7 @@ Ext.define('Melisa.core.Module', {
          * extract to
          * http://docs.sencha.com/extjs/6.2.0/modern/src/BaseController.js.html#Ext.app.BaseController-method-redirectTo
          * 
-         */
+ */
         
         isCurrent = Ext.util.History.getToken() === token;
         
