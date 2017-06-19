@@ -12,10 +12,19 @@ Ext.define('Melisa.view.desktop.menu.Modal', {
     scrollable: 'vertical',
     height: '100%',
     maskClickAction: 'hide',
+    plugins: 'responsive',
     modal: true,
     title: false,
     closable: true,
     draggable: false,
+    responsiveConfig: {
+        'width < 300': {
+            minWidth: '100%'
+        },
+        'width > 300': {
+            minWidth: 300
+        }
+    },
     showAnimation: {
         type: 'slide',
         direction: 'right'
