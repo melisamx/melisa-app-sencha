@@ -5,7 +5,9 @@ Ext.define('Melisa.view.desktop.toolbar.Default', {
     items: [
         '->',
         {
-            text: 'Guardar',
+            bind: {
+                text: '{i18n.btnSave ? i18n.btnSave : "Guardar"}'
+            },
             scale: 'large',
             iconCls: 'x-fa fa-save',
             listeners: {
