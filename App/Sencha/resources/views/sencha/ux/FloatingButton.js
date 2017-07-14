@@ -5,7 +5,7 @@ Ext.define('Melisa.ux.FloatingButton', {
     config: {
         configButton: {},
         align: 'tr-br',
-        offset: [ -40, -80],
+        offset: [ -40, -85],
         button: null
     },
     
@@ -60,9 +60,10 @@ Ext.define('Melisa.ux.FloatingButton', {
     createButton: function(config) {
         return Ext.applyIf(config, {
             xtype: 'button',
+            cls: 'floating-button',
+            scale: 'large',
             floating: true,
-            shadow: false,
-            cls: 'floating-button'
+            shadow: false
         });
     }
     

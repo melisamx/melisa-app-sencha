@@ -10,9 +10,8 @@ Ext.define('Melisa.view.desktop.wrapper.window.Add', {
         'Melisa.core.Module'
     ],
     
-    width: '70%',
-    height: '100%',
-    minWidth: 600,
+    layout: 'fit',
+    bodyPadding: 0,
     modal: true,
     bbar: {
         xtype: 'toolbardefault'
