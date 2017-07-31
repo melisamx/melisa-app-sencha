@@ -26,6 +26,7 @@ Ext.define('Melisa.core.Application', {
         'Melisa.core.ViewController',
         'Melisa.util.Format'
     ] : [
+        'Melisa.override.menu.Item',
         'Melisa.override.Button',
         'Melisa.override.form.Panel',
         'Melisa.override.form.field.Text',

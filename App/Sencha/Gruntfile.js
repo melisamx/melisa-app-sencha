@@ -25,6 +25,7 @@ module.exports = function(grunt) {
             concat: {
                 files: {
                     '<%= pkg.output %>js/melisa-sencha-classic.min.js': [
+                        '<%= pkg.sencha %>override/menu/Item.js',
                         '<%= pkg.sencha %>override/Button.js',
                         '<%= pkg.sencha %>override/form/Panel.js',
                         '<%= pkg.sencha %>override/form/field/Text.js',

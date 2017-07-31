@@ -12,16 +12,16 @@ Ext.define('Melisa.override.form.field.ComboBox', {
         'melisa'
     ],
     
-    constructor: function (config) {
-        
+    constructor: function () {        
         var me = this;
-        
-        me.listConfig = Ext.applyIf(config.listConfig, {
-            cls: 'x-grid-empty',
-            emptyText: 'Dato no encontrado'
-        });
         
         me.callParent(arguments);
         
+        me.listConfig = Ext.applyIf(me.listConfig || {
+            cls: 'x-grid-empty'
+        }, {
+            cls: 'x-grid-empty',
+            emptyText: 'Dato no encontrado'
+        });
     }
 });

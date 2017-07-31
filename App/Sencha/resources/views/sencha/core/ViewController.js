@@ -14,6 +14,7 @@ Ext.define('Melisa.core.ViewController', {
     
     config: {
         handlersClass: [
+            'Ext.menu.Item',
             'Ext.Button',
             'Ext.button.Button',
             'Ext.form.field.Text',
@@ -96,7 +97,7 @@ Ext.define('Melisa.core.ViewController', {
             },
             className = Ext.getClassName(config),
             launcher;
-        
+        console.log(className);
         if( classHandlers.indexOf(className) !== -1) {
             launcher = config;
             config = config.getMelisa();
