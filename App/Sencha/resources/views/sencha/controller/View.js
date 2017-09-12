@@ -41,6 +41,29 @@ Ext.define('Melisa.controller.View', {
         this.getViewModel().getStore(storeReload).load();
     },
     
+    autoSelectRecord: function(gridName, id) {
+        var me = this,
+            grid = me.getView().down(gridName),
+            store = grid.getStore(),
+            record;
+        
+        store.load(function(records) {
+            if( Ext.isEmpty(records)) {
+                console.log('no records found');
+                return;
+            }
+            
+            record = store.getById(id);
+            
+            if( !record) {
+                console.log('no exist record in store, omited auto select');
+                return;
+            }
+            
+            grid.setSelection(record);
+        });
+    },
+    
     onShowItemReport: function(v, record) {
         var me = this,
             winReport = me.getWindowReport(record),

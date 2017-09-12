@@ -43,6 +43,7 @@ Ext.define('Melisa.controller.Submit', {
             success: Ext.bind(me.onSuccessSubmit, me),
             failure: Ext.bind(me.onErrorSubmit, me),
             waitMsg: model.get('i18n.saving'),
+            timeout: 9999,
             
             /* necesary laravel csrf */
             headers: {
