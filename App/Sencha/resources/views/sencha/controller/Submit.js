@@ -98,10 +98,32 @@ Ext.define('Melisa.controller.Submit', {
     onErrorSubmit: function(form, action) {        
         console.log('onErrorSubmit', arguments);        
         var me = this,
-            view = me.getView();
+            view = me.getView(),
+            result;
              
-        view.fireEvent('errorsubmit', form, action);
+        if( !view.fireEvent('errorsubmit', form, action)) {
+            console.log('cancel logic error sumit');
+            return;
+        }
         
+        result = Ext.decode(action.response.responseText, true);
+        
+        if( !result) {
+            console.log('invalid josn');
+            return;
+        }
+        
+        me.processErrors(result.errors);
+    },
+    
+    processErrors: function(errors) {
+        var me = this,
+            message = [];
+        Ext.each(errors, function(error) {
+            message.push(error.message);
+        });
+        
+        me.showError('Ímposible completar acción', message.join('<br>'));
     }
     
 });

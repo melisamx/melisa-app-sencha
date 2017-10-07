@@ -6,7 +6,7 @@ module.exports = function(grunt) {
             sencha: 'resources/views/sencha/',
             src: 'resources/assets/',
             srcSencha: 'resources/views/sencha/',
-            output: '../../public/<%= pkg.appName.toLowerCase() %>/',
+            output: '../../public/apps/<%= pkg.appName.toLowerCase() %>/',
             proyect: {
                 name: 'Melisa Sencha',
                 version: '1.0.0',
