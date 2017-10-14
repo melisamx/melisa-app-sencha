@@ -14,7 +14,7 @@ Ext.define('Melisa.controller.AppendFields', {
             /* fix error ui no show */
             appendFieldsTo = typeof view.getAppendFieldsTo !== 'undefined' ? 
                 view.getAppendFieldsTo() : null;
-    
+                
         if( me.getIsAppendedFields()) {
             me.log('ignore append fields');
             return;

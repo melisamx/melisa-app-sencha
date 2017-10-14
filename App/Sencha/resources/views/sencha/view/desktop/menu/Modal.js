@@ -18,11 +18,11 @@ Ext.define('Melisa.view.desktop.menu.Modal', {
     closable: true,
     draggable: false,
     responsiveConfig: {
-        'width < 300': {
+        'width < 350': {
             minWidth: '100%'
         },
-        'width > 300': {
-            minWidth: 300
+        'width >= 350': {
+            minWidth: 350
         }
     },
     showAnimation: {
