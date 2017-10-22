@@ -123,7 +123,7 @@ Ext.define('Melisa.controller.Submit', {
             message.push(error.message);
         });
         
-        me.showError('Ímposible completar acción', message.join('<br>'));
+        me.showError('Imposible completar acción', message.join('<br>'));
     }
     
 });
