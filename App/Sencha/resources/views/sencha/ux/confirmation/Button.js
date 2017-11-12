@@ -2,6 +2,10 @@ Ext.define('Melisa.ux.confirmation.Button', {
     extend: 'Ext.plugin.Abstract',
     alias: 'plugin.buttonconfirmation',
     
+    requires: [
+        'Melisa.core.Error'
+    ],
+    
     config: {
         url: null,
         titleConfirmation: 'Confirmación requerida',
@@ -17,19 +21,16 @@ Ext.define('Melisa.ux.confirmation.Button', {
         refreshSourceSuccess: true
     },
     
-    init: function(button) {
-        
+    init: function(button) {        
         var me = this;
         
         button.on({
             click: me.onClickBtnConfirmation,
             scope: me
-        });
-        
+        });        
     },
     
-    onClickBtnConfirmation: function() {
-        
+    onClickBtnConfirmation: function() {        
         var me = this,
             button = me.getCmp(),
             params = me.getInputParams(),
@@ -50,8 +51,7 @@ Ext.define('Melisa.ux.confirmation.Button', {
         Ext.Msg.confirm(me.getTitleConfirmation(),
             me.getMessageConfirmation(), 
             me.onCallBack, 
-            me);
-        
+            me);        
     },
     
     getInputParams: function() {        
@@ -99,8 +99,14 @@ Ext.define('Melisa.ux.confirmation.Button', {
         });        
     },
     
-    onSuccessAction: function() {        
-        var me = this;
+    onSuccessAction: function(response) {        
+        var me = this,
+            result = Ext.decode(response.responseText, true);
+    
+        if( !result || !result.success) {
+            me.emitErrorAjax(response);
+            return;
+        }
         
         me.closeMessageWait();
         me.showMessageSuccess(me.getMessageSuccess());
@@ -125,27 +131,29 @@ Ext.define('Melisa.ux.confirmation.Button', {
         });
     },
     
-    onFailureAction: function() {
-        
-        var me = this;
+    onFailureAction: function(response) {        
+        var me = this,
+            result = Ext.decode(response.responseText);
         
         me.closeMessageWait();
-        Ext.Msg.alert(me.getTitleError(), me.getMessageError());
-        console.log(arguments);
-        
+        me.emitErrorAjax(result);
     },
     
-    showMessageWait: function() {
-        
+    emitErrorAjax: function(result) {
+        var me = this;
+        Ext.fireEvent('error.ajax', result, {
+            title: me.getTitleError(),
+            messageUnknown: me.getMessageError()
+        });
+    },
+    
+    showMessageWait: function() {        
         var me = this;        
-        Ext.Msg.wait(me.getMessageWait(), me.getTitleWait());
-        
+        Ext.Msg.wait(me.getMessageWait(), me.getTitleWait());        
     },
     
-    closeMessageWait: function() {
-            
-        Ext.Msg.close();
-        
+    closeMessageWait: function() {            
+        Ext.Msg.close();        
     }
     
 });
