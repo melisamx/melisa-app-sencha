@@ -18,7 +18,9 @@ Ext.define('Melisa.ux.confirmation.Button', {
         source: 'grid',
         params: [],
         token: null,
-        refreshSourceSuccess: true
+        refreshSourceSuccess: true,
+        restFull: false,
+        restFullMethod: 'DELETE'
     },
     
     init: function(button) {        
@@ -77,7 +79,12 @@ Ext.define('Melisa.ux.confirmation.Button', {
             return;
         }
         
-        me.setUrl(config.url);
+        if( me.getRestFull()) {
+            urlTemplate = new Ext.Template(config.url);
+            me.setUrl(urlTemplate.apply(me.getParams()));
+        } else {
+            me.setUrl(config.url);
+        }
         
         me.showMessageWait();        
         me.createRequest();        
@@ -89,7 +96,7 @@ Ext.define('Melisa.ux.confirmation.Button', {
         Ext.Ajax.request({
             url: me.getUrl(),
             params: me.getParams(),
-            method: 'POST',
+            method: me.getRestFull() ? me.getRestFullMethod() : 'POST',
             success: me.onSuccessAction,
             failure: me.onFailureAction,
             headers: {
