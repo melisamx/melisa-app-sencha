@@ -11,15 +11,9 @@
 |
 */
 
-require_once __DIR__ . '/../App/Sencha/Application.php';
+use App\Sencha\Application;
 
-$app = new App\Sencha\Application(
-    [
-        'base'=>  realpath(__DIR__ . '/../App/Sencha'),
-        'storage'=> realpath(__DIR__ . '/../App/Sencha/storage'),
-        'storageSession'=>realpath(__DIR__ . '/../storage/framework/sessions'),
-    ]
-);
+$app = new App\Sencha\Application(realpath(__DIR__ . '/../App/Sencha'));
 
 /*
 |--------------------------------------------------------------------------
