@@ -2,11 +2,13 @@ Ext.define('Melisa.override.Button', {
     override: 'Ext.Button',
     
     config: {
-        melisa: null
+        melisa: null,
+        record: null
     },
     
     publishes: [
-        'melisa'
+        'melisa',
+        'record'
     ]
     
 });

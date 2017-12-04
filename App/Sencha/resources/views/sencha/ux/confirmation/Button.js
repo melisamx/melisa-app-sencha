@@ -20,7 +20,9 @@ Ext.define('Melisa.ux.confirmation.Button', {
         token: null,
         refreshSourceSuccess: true,
         restFull: false,
-        restFullMethod: 'DELETE'
+        restFullMethod: 'DELETE',
+        fieldId: 'id',
+        fieldIdRecord: 'id'
     },
     
     init: function(button) {        
@@ -59,11 +61,13 @@ Ext.define('Melisa.ux.confirmation.Button', {
     getInputParams: function() {        
         var me = this,
             button = me.getCmp(),
-            buttonVm = button.getViewModel();
+            buttonVm = button.getViewModel(),
+            fieldId = me.getFieldId(),
+            fieldIdRecord = me.getFieldIdRecord(),
+            params = {};
         
-        return {
-            id: buttonVm.get('record').get('id')
-        };        
+        params [fieldId]= buttonVm.get('record').get(fieldIdRecord);
+        return params;        
     },
     
     onCallBack: function(response) {        
