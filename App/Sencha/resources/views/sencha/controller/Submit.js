@@ -32,8 +32,9 @@ Ext.define('Melisa.controller.Submit', {
         
         var me = this;
         
-        if( !Ext.platformTags.modern &&  !view.isValid()) {
-            console.log('formulario invalido');
+        if( !Ext.platformTags.modern && !view.isValid()) {
+            console.log('formulario invalido sera');
+            me.higlightError(view);
             return false;
         }
         
@@ -52,6 +53,25 @@ Ext.define('Melisa.controller.Submit', {
             params: extraParams === true ? params : null
         });
         
+    },
+    
+    higlightError: function(form) {
+        var invalidFields = form.query('field{isValid()==false}');
+    
+        if( Ext.isEmpty(invalidFields)) {
+            console.log('no invalid fields');
+            return;
+        }
+        
+        Ext.Msg.alert('Formulario invalido', [
+            'El campo ',
+            '<b>',
+            invalidFields[0].fieldLabel,
+            '</b>',
+            invalidFields[0].activeError
+        ].join(''), function() {
+            invalidFields[0].focus();
+        });
     },
     
     onSuccessSubmit: function(response, action) {
