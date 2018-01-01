@@ -103,9 +103,9 @@ Ext.define('Melisa.controller.View', {
                 title: 'Report',
                 vmReport: 'modules.report',
                 nocache: true,
-                neverCache: false
+                neverCache: true
             });
-    
+            
         if( me.windowReport) {
             return me.windowReport;
         }
