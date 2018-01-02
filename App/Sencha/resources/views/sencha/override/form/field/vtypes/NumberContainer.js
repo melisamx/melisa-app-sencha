@@ -9,6 +9,8 @@ Ext.define('Melisa.override.form.field.vtypes.NumberContainer', {
             nPow2 = 1,
             i;
         
+        value = value.toUpperCase();
+        
         if(value.length !== 11) {            
             return false;            
         }
@@ -31,6 +33,6 @@ Ext.define('Melisa.override.form.field.vtypes.NumberContainer', {
     },
     
     numberContainerText: 'Numero de contenedor invalido (Ingrese en mayusculas)',
-    numberContainerMask: /[A-Z0-9]/
+    numberContainerMask: /[A-Za-z0-9]/
     
 });
