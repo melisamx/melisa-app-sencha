@@ -34,7 +34,6 @@ Ext.define('Melisa.core.Application', {
         'Melisa.override.form.field.Checkbox',
         'Melisa.override.form.field.DateField',
         'Melisa.override.form.field.Number',
-        'Melisa.override.window.Window',
         'Melisa.override.grid.column.Widget',
         'Melisa.override.grid.column.Boolean',
         'Melisa.util.Format',
