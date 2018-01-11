@@ -14,8 +14,8 @@ class ApplicationSeeder extends InstallSeeder
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.21.0',
-            'comments'=>'Se agrego clase para cancelar comportamiento normal del navegador al presionar F5'
+            'version'=>'1.21.1',
+            'comments'=>'Se agrego clase para crregir bug del campo timefield'
         ]);        
     }
     
