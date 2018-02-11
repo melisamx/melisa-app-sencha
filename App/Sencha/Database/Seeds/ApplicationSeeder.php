@@ -14,7 +14,7 @@ class ApplicationSeeder extends InstallSeeder
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.21.1',
+            'version'=>'1.21.2',
             'comments'=>'Se agrego clase para crregir bug del campo timefield'
         ]);        
     }

@@ -3,7 +3,7 @@ Ext.define('Melisa.view.phone.default.WindowReport', {
     alias: 'widget.melisaDefaultWindowReport',
     
     requires: [
-        'Melisa.ux.Iframe'
+        'Melisa.view.phone.Iframe'
     ],
     
     width: '80%',
