@@ -14,8 +14,8 @@ class ApplicationSeeder extends InstallSeeder
             'description'=>'Application Sencha',
             'nameSpace'=>'Melisa',
             'typeSecurity'=>'art',
-            'version'=>'1.21.2',
-            'comments'=>'Se agrego clase para crregir bug del campo timefield'
+            'version'=>'1.22.0',
+            'comments'=>'Upgrade Laravel 5.6'
         ]);        
     }
     

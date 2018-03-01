@@ -22,15 +22,13 @@ Ext.define('Melisa.controller.Create', {
             return;
         }
         
-        view.on('ready', me.onReady, me)
-        
+        view.on('ready', me.onReady, me);        
     },
     
     onReady: function () {
         
         var me = this,
             form = me.getViewForm();
-        
         
         if( !Ext.platformTags.modern) {
             form = form.getForm();
